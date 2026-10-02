@@ -82,9 +82,19 @@ button:disabled{cursor:not-allowed;opacity:.45;}
 .start-box{
   background:var(--panel);border:2px solid var(--gold);border-radius:16px;
   box-shadow:inset 0 0 0 1px var(--gold),0 10px 26px rgba(0,0,0,.5);
-  padding:26px 30px;display:flex;flex-direction:column;gap:16px;min-width:300px;max-width:380px;
+  padding:26px 30px;display:flex;flex-direction:column;gap:16px;width:min(100%,460px);min-width:300px;
   backdrop-filter:blur(6px);
 }
+.mode-choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.mode-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:112px;padding:18px 12px;border-radius:14px;background:var(--ink);color:var(--cream);border:3px solid var(--gold);font-family:var(--font-display);font-size:22px;box-shadow:3px 4px 0 rgba(0,0,0,.35);transition:.2s;}
+.mode-btn span{font-family:inherit;font-size:34px;line-height:1;}
+.mode-btn:hover,.mode-btn:focus-visible{background:var(--gold);color:var(--ink);transform:translateY(-2px);}
+.mode-panel{display:flex;flex-direction:column;gap:16px;}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--gold);font-family:var(--font-display);font-size:22px;}
+.panel-head .back-btn{padding:5px 10px;border:1px solid var(--gold);border-radius:8px;color:var(--text-dim);font-family:inherit;font-size:13px;}
+.panel-head .back-btn:hover{color:var(--ink);background:var(--gold);}
+.start-tools{display:flex;gap:10px;justify-content:flex-end;}
+.start-tools .btn{padding:7px 11px;font-size:12px;}
 .start-box label{font-size:13px;color:var(--text-dim);display:flex;justify-content:space-between;align-items:center;gap:14px;}
 .start-box select,.start-box input[type=range]{
   background:var(--ink);color:var(--cream);border:2px solid var(--gold);
@@ -409,6 +419,10 @@ button:disabled{cursor:not-allowed;opacity:.45;}
   .uno-card .corner{font-size:13px;}
   #centerPiles{gap:12px;}
   #hand .hand-card{margin-left:-27px;}
+  .start-box{padding:22px 18px;}
+  .mode-choice{gap:10px;}
+  .mode-btn{min-height:98px;font-size:18px;}
+  .mode-btn span{font-size:28px;}
 }
 </style>
 </head>
@@ -419,67 +433,76 @@ button:disabled{cursor:not-allowed;opacity:.45;}
   <div class="logo"><span>UNO</span></div>
   <p class="tagline">战 AI · 玩特殊规则 · 手牌满 30 张进入结算</p>
   <div class="start-box">
-    <label>玩家数量
-      <select id="playerCount">
-        <option value="3">3 人（你 + 2 AI）</option>
-        <option value="4" selected>4 人（你 + 3 AI）</option>
-        <option value="5">5 人（你 + 4 AI）</option>
-        <option value="6">6 人（你 + 5 AI）</option>
-      </select>
-    </label>
-    <label>AI 思考速度
-      <input type="range" id="aiSpeed" min="0.6" max="2" step="0.1" value="1.2">
-    </label>
-    <div class="btn-row">
+    <div id="modeChooser" class="mode-choice">
+      <button class="mode-btn" id="btnSoloMode"><span>🤖</span>单人游戏</button>
+      <button class="mode-btn" id="btnMultiMode"><span>🌐</span>多人游戏</button>
+    </div>
+    <div class="start-tools">
       <button class="btn" id="btnTheme">🌗 主题</button>
       <button class="btn" id="btnSound">🔊 声音</button>
     </div>
-    <button class="btn primary" id="btnStart">开 始 游 戏</button>
-    <details class="rules">
-      <summary>特殊规则说明</summary>
-      <div class="rules-body">
-        <b>不幸13</b>：抽牌后手牌恰好 13 张 → 再抽 13 张。<br>
-        <b>机会 0</b>：正常出牌时打出数字「0」，随机触发 8 种活动之一：<br>
-        ▸ <b>庞氏骗局</b>：继续出牌，第一个被迫抽牌者抽「期间所有出牌+抽牌数」张。<br>
-        ▸ <b>德州扑克</b>：选对手比数字，小者抽「较大数字」张；平局无事。<br>
-        ▸ <b>火攻</b>：选对手比颜色，颜色相同你抽4，不同对手抽4。<br>
-        ▸ <b>闪电</b>：掷两颗骰子，按点数决定谁抽多少张。<br>
-        ▸ <b>决斗</b>：指定颜色与对手对决，先无法出牌者抽「期间出牌数」张。<br>
-        ▸ <b>铁索连环</b>：随机与一名其他玩家形成风险共同体，任一方被罚抽牌时另一方同受，一次后解除。<br>
-        ▸ <b>桃源结义</b>：所有人轮流丢弃最多一半手牌。<br>
-        ▸ <b>五谷丰登</b>：所有人轮流丢弃所有与「0」同色的牌。<br>
-        <b>UNO</b>：剩 1 张时须喊 UNO，被捉到漏喊抽 2 张。<br>
-        <b>计分</b>：数字=面值，动作牌=20，野牌=50；任一玩家手牌达到 <b>30 张</b> 时立即结算，先比手牌数、再比手牌点数；每轮得分累计，先达 <b>500 分</b> 获胜。
+    <div id="soloPanel" class="mode-panel hidden">
+      <div class="panel-head"><span>🤖 单人游戏</span><button class="back-btn" id="btnBackMode">返回</button></div>
+      <label>玩家数量
+        <select id="playerCount">
+          <option value="3">3 人（你 + 2 AI）</option>
+          <option value="4" selected>4 人（你 + 3 AI）</option>
+          <option value="5">5 人（你 + 4 AI）</option>
+          <option value="6">6 人（你 + 5 AI）</option>
+        </select>
+      </label>
+      <label>AI 思考速度
+        <input type="range" id="aiSpeed" min="0.6" max="2" step="0.1" value="1.2">
+      </label>
+      <button class="btn primary" id="btnStart">开 始 游 戏</button>
+      <details class="rules">
+        <summary>特殊规则说明</summary>
+        <div class="rules-body">
+          <b>不幸13</b>：抽牌后手牌恰好 13 张 → 再抽 13 张。<br>
+          <b>机会 0</b>：正常出牌时打出数字「0」，随机触发 8 种活动之一：<br>
+          ▸ <b>庞氏骗局</b>：继续出牌，第一个被迫抽牌者抽「期间所有出牌+抽牌数」张。<br>
+          ▸ <b>德州扑克</b>：选对手比数字，小者抽「较大数字」张；平局无事。<br>
+          ▸ <b>火攻</b>：选对手比颜色，颜色相同你抽4，不同对手抽4。<br>
+          ▸ <b>闪电</b>：掷两颗骰子，按点数决定谁抽多少张。<br>
+          ▸ <b>决斗</b>：指定颜色与对手对决，先无法出牌者抽「期间出牌数」张。<br>
+          ▸ <b>铁索连环</b>：随机与一名其他玩家形成风险共同体，任一方被罚抽牌时另一方同受，一次后解除。<br>
+          ▸ <b>桃源结义</b>：所有人轮流丢弃最多一半手牌。<br>
+          ▸ <b>五谷丰登</b>：所有人轮流丢弃所有与「0」同色的牌。<br>
+          <b>UNO</b>：剩 1 张时须喊 UNO，被捉到漏喊抽 2 张。<br>
+          <b>计分</b>：数字=面值，动作牌=20，野牌=50；任一玩家手牌达到 <b>30 张</b> 时立即结算，先比手牌数、再比手牌点数；每轮得分累计，先达 <b>500 分</b> 获胜。
+        </div>
+      </details>
+    </div>
+    <div id="multiPanel" class="mode-panel hidden">
+      <div class="panel-head"><span>🌐 多人游戏</span><button class="back-btn" id="btnBackMulti">返回</button></div>
+      <div class="mp-divider">━━ 局域网联机 ━━</div>
+      <div class="mp-row">
+        <input id="mpName" class="mp-input" maxlength="12" placeholder="昵称" value="">
+        <input id="mpRoomCode" class="mp-input code" maxlength="4" placeholder="4位码">
       </div>
-    </details>
-
-    <div class="mp-divider">━━ 局域网联机 ━━</div>
-    <div class="mp-row">
-      <input id="mpName" class="mp-input" maxlength="12" placeholder="昵称" value="">
-      <input id="mpRoomCode" class="mp-input code" maxlength="4" placeholder="4位码">
-    </div>
-    <div class="mp-row">
-      <select id="mpPlayers" class="mp-input">
-        <option value="4" selected>4 人桌</option>
-        <option value="2">2 人</option>
-        <option value="3">3 人</option>
-        <option value="5">5 人</option>
-        <option value="6">6 人</option>
-      </select>
-      <label class="mp-check"><input type="checkbox" id="mpAiFill" checked> AI 补位</label>
-    </div>
-    <div class="btn-row">
-      <button class="btn" id="btnCreateRoom">创建房间</button>
-      <button class="btn" id="btnJoinRoom">加入房间</button>
-    </div>
-    <div id="mpStatus" class="mp-status"></div>
-    <div id="mpLobby" class="mp-lobby hidden">
-      <div class="mp-title" id="mpRoomTitle"></div>
-      <div id="mpSeats"></div>
+      <div class="mp-row">
+        <select id="mpPlayers" class="mp-input">
+          <option value="4" selected>4 人桌</option>
+          <option value="2">2 人</option>
+          <option value="3">3 人</option>
+          <option value="5">5 人</option>
+          <option value="6">6 人</option>
+        </select>
+        <label class="mp-check"><input type="checkbox" id="mpAiFill" checked> AI 补位</label>
+      </div>
       <div class="btn-row">
-        <button class="btn primary" id="btnMpStart">开始游戏</button>
-        <button class="btn" id="btnMpReady">就绪</button>
-        <button class="btn" id="btnMpLeave">离开房间</button>
+        <button class="btn" id="btnCreateRoom">创建房间</button>
+        <button class="btn" id="btnJoinRoom">加入房间</button>
+      </div>
+      <div id="mpStatus" class="mp-status"></div>
+      <div id="mpLobby" class="mp-lobby hidden">
+        <div class="mp-title" id="mpRoomTitle"></div>
+        <div id="mpSeats"></div>
+        <div class="btn-row">
+          <button class="btn primary" id="btnMpStart">开始游戏</button>
+          <button class="btn" id="btnMpReady">就绪</button>
+          <button class="btn" id="btnMpLeave">离开房间</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1625,6 +1648,20 @@ function backToStart() {
   clearAI();
   byId('gameScreen').classList.add('hidden');
   byId('startScreen').classList.remove('hidden');
+  showStartMode('chooser');
+}
+
+function showStartMode(mode) {
+  const chooser = byId('modeChooser');
+  const solo = byId('soloPanel');
+  const multi = byId('multiPanel');
+  chooser.classList.toggle('hidden', mode !== 'chooser');
+  solo.classList.toggle('hidden', mode !== 'solo');
+  multi.classList.toggle('hidden', mode !== 'multi');
+  if (mode === 'chooser') {
+    byId('mpLobby').classList.add('hidden');
+    byId('mpStatus').textContent = '';
+  }
 }
 
 /* ---------- 分数面板 ---------- */
@@ -1738,6 +1775,7 @@ function connectMP(create, maxPlayers) {
     }
     MODE = 'solo';
     byId('btnStart').disabled = false;
+    showStartMode('chooser');
   };
 }
 function onWsMessage(msg) {
@@ -1772,6 +1810,7 @@ function renderLobby(l) {
   closeModal();
   byId('startScreen').classList.remove('hidden');
   byId('gameScreen').classList.add('hidden');
+  showStartMode('multi');
   byId('btnStart').disabled = true;
   byId('mpLobby').classList.remove('hidden');
   byId('mpRoomTitle').textContent = '房间 ' + l.roomCode + '（' + (l.status === 'playing' ? '游戏中' : '等待中') + ' · ' + l.maxPlayers + ' 人桌）';
@@ -2015,6 +2054,7 @@ function initMP() {
     byId('mpStatus').textContent = '';
     byId('btnStart').disabled = false;
     MODE = 'solo';
+    showStartMode('chooser');
   });
 }
 
@@ -2095,6 +2135,7 @@ function init() {
   applyTheme();
   updateSoundBtns();
   S.settings.aiSpeed = parseFloat(byId('aiSpeed').value) || 1.2;
+  showStartMode('chooser');
 
   byId('aiSpeed').addEventListener('input', function (e) {
     S.settings.aiSpeed = parseFloat(e.target.value);
@@ -2102,6 +2143,18 @@ function init() {
   });
   byId('btnStart').addEventListener('click', function () {
     startGame(parseInt(byId('playerCount').value, 10));
+  });
+  byId('btnSoloMode').addEventListener('click', function () { showStartMode('solo'); });
+  byId('btnMultiMode').addEventListener('click', function () { showStartMode('multi'); });
+  byId('btnBackMode').addEventListener('click', function () { showStartMode('chooser'); });
+  byId('btnBackMulti').addEventListener('click', function () {
+    if (WS) {
+      sendMsg({ type: 'leaveRoom' });
+      WS.close();
+      WS = null;
+      MODE = 'solo';
+    }
+    showStartMode('chooser');
   });
   byId('btnTheme').addEventListener('click', toggleTheme);
   byId('btnTheme2').addEventListener('click', toggleTheme);
