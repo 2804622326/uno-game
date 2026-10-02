@@ -1085,7 +1085,7 @@ function aiTurn() {
       setStatus(idx, '无法出牌');
       finishDuelDraw(idx);
     } else {
-      const dec = UNOCore.aiDecide(p.hand, g.activeColor, g.activeValue);
+      const dec = UNOCore.aiDecideDuel(p.hand, g.activeColor, g.activeValue);
       doPlay(idx, dec.index, dec.color);
     }
     return;

@@ -323,7 +323,7 @@ function aiTurn(room) {
   if (g.duel) {
     const playable = UNOCore.duelPlayableIndexes(p.hand, g.activeColor, g.activeValue);
     if (playable.length === 0) { duelDrawFlow(room, idx); return; }
-    const dec = UNOCore.aiDecide(p.hand, g.activeColor, g.activeValue);
+    const dec = UNOCore.aiDecideDuel(p.hand, g.activeColor, g.activeValue);
     doPlay(room, idx, dec.index, dec.color);
     return;
   }

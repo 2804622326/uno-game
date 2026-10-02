@@ -501,8 +501,8 @@
 
   // 返回 { index, color }，color 仅野牌需要
   // 策略：优先非野牌；高价值/动作牌优先；野牌留作最后手段；+4 尽量少用
-  function aiDecide(hand, activeColor, activeValue) {
-    const playable = playableIndexes(hand, activeColor, activeValue);
+  function aiDecide(hand, activeColor, activeValue, allowedIndexes) {
+    const playable = allowedIndexes || playableIndexes(hand, activeColor, activeValue);
     if (playable.length === 0) return null;
     const normal = playable.filter(i => hand[i].type !== 'wild' && hand[i].type !== 'wild4');
     const pool = normal.length ? normal : playable;
@@ -533,6 +533,9 @@
   function duelPlayableIndexes(hand, activeColor, activeValue) {
     return playableIndexes(hand, activeColor, activeValue)
       .filter(i => hand[i].value !== 'draw2' && hand[i].value !== 'draw2rev');
+  }
+  function aiDecideDuel(hand, activeColor, activeValue) {
+    return aiDecide(hand, activeColor, activeValue, duelPlayableIndexes(hand, activeColor, activeValue));
   }
 
   /* ---------- 接龙（+2/+4 stacking） ---------- */
@@ -597,7 +600,7 @@
     applyShowdown, applyLightning, applyIron, applyDuelStart, duelDraw,
     pickLowestCards, discardCards, discardColorCards,
     scoreHand, handLimitWinner, roundEnd, isGameOver,
-    chooseColorForAI, aiDecide,
+    chooseColorForAI, aiDecide, aiDecideDuel,
   };
 
   /* ========== 发牌（放在 return 之前，因为 deal 需要在顶部定义） ========== */

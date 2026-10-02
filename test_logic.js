@@ -515,6 +515,15 @@ t('决斗：不能打出 +2（含转向+2），+4 仍可出', () => {
   eq(g.duel.count, 1, '决斗计数+1');
 });
 
+t('决斗：AI 不会选择被禁用的 +2', () => {
+  const hand = [
+    { color: 'red', value: 'draw2', type: 'action' },
+    { color: 'red', value: '9', type: 'number' },
+  ];
+  const dec = U.aiDecideDuel(hand, 'red', '7');
+  eq(dec.index, 1, '应选择普通牌9');
+});
+
 t('决斗：+4 仍可打出，对手抽4张', () => {
   const g = U.newGame(4);
   g.deck = U.buildDeck();
