@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>UNO 大作战</title>
+<link rel="icon" href="data:,">
+<style>
+/* ==================== 内嵌字体：Lilita One（SIL OFL 协议，1930s 卡通显示字体，仅 Latin） ==================== */
+@font-face{
+  font-family:'Lilita One';
+  src:url(data:font/woff2;base64,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) format('woff2');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+/* ==================== 主题变量（茶杯头 · 老赌场：墨绿绒面 + 金色 Art Deco） ==================== */
+:root{
+  --bg:#0f2a1e;
+  --felt1:#1e5c3b;
+  --felt2:#16452c;
+  --felt-edge:#2a7d4e;
+  --panel:rgba(15,35,24,.72);
+  --panel-border:#d9a441;
+  --ink:#0f2318;
+  --gold:#d9a441;
+  --danger:#e23b2e;
+  --ok:#51cf66;
+  --cream:#f0e6d0;
+  --text:#f0e6d0;
+  --text-dim:rgba(240,230,208,.62);
+  --card-w:104px;
+  --card-h:156px;
+  --card-rad:12px;
+  --shadow:0 5px 0 rgba(0,0,0,.35);
+  --font-display:'Lilita One','PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;
+}
+.theme-light{
+  --bg:#e9ddc0;
+  --felt1:#3e8e5e;
+  --felt2:#2c6e45;
+  --felt-edge:#c9a24a;
+  --panel:rgba(240,230,208,.6);
+  --panel-border:#b8862f;
+  --ink:#3a2f1e;
+  --gold:#b8862f;
+  --danger:#d64541;
+  --ok:#2ea44f;
+  --cream:#f7f0de;
+  --text:#3a2f1e;
+  --text-dim:rgba(58,47,30,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  overflow:hidden;user-select:none;
+}
+.hidden{display:none !important;}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+button:disabled{cursor:not-allowed;opacity:.45;}
+
+/* ==================== 开始界面（1930s 剧场海报） ==================== */
+#startScreen{
+  background:
+    radial-gradient(1200px 700px at 50% 26%,#1e4d3a 0%,#143528 60%,#0f2a1e 100%);
+  align-items:center;justify-content:center;padding:20px;text-align:center;z-index:50;
+  overflow-y:auto;
+}
+#startScreen::before{
+  content:'';position:absolute;inset:8px;border:2px solid var(--gold);border-radius:14px;
+  box-shadow:inset 0 0 0 1px var(--gold);pointer-events:none;
+}
+#startScreen .logo{
+  font-family:var(--font-display);font-size:96px;font-weight:400;letter-spacing:6px;color:var(--gold);
+  -webkit-text-stroke:3px var(--ink);
+  text-shadow:6px 6px 0 var(--ink),0 0 40px rgba(217,164,65,.45);
+  margin-bottom:6px;transform:rotate(-2deg);
+}
+#startScreen .logo span{display:inline-block;transform:rotate(-6deg);}
+#startScreen .tagline{color:var(--text-dim);margin-bottom:34px;font-size:15px;letter-spacing:1px;}
+.start-box{
+  background:var(--panel);border:2px solid var(--gold);border-radius:16px;
+  box-shadow:inset 0 0 0 1px var(--gold),0 10px 26px rgba(0,0,0,.5);
+  padding:26px 30px;display:flex;flex-direction:column;gap:16px;min-width:300px;max-width:380px;
+  backdrop-filter:blur(6px);
+}
+.start-box label{font-size:13px;color:var(--text-dim);display:flex;justify-content:space-between;align-items:center;gap:14px;}
+.start-box select,.start-box input[type=range]{
+  background:var(--ink);color:var(--cream);border:2px solid var(--gold);
+  border-radius:8px;padding:8px 12px;font-size:14px;
+}
+.start-box option{color:var(--cream);}
+.btn-row{display:flex;gap:10px;justify-content:center;}
+.btn{
+  padding:10px 18px;border-radius:10px;background:var(--ink);color:var(--cream);
+  border:2px solid var(--gold);font-size:14px;transition:.2s;box-shadow:2px 3px 0 rgba(0,0,0,.35);
+}
+.btn:hover{background:var(--gold);color:var(--ink);}
+.btn.primary{
+  background:#e23b2e;color:#fff;font-family:var(--font-display);font-size:17px;font-weight:400;
+  padding:13px;border:3px solid var(--ink);box-shadow:4px 5px 0 var(--ink),0 6px 18px rgba(226,59,46,.4);
+  margin-top:4px;transform:rotate(-1deg);
+}
+.btn.primary:hover{filter:brightness(1.08);transform:rotate(-1deg) translateY(-2px) scale(1.03);}
+.rules{margin-top:6px;font-size:13px;text-align:left;color:var(--text-dim);}
+.rules summary{cursor:pointer;color:var(--gold);text-align:center;list-style:none;font-weight:600;}
+.rules summary::before{content:"▸ ";font-size:11px;}
+.rules[open] summary::before{content:"▾ ";}
+.rules .rules-body{background:rgba(0,0,0,.35);border:1px solid rgba(217,164,65,.35);border-radius:10px;padding:14px 16px;margin-top:10px;line-height:1.9;max-height:38vh;overflow-y:auto;}
+.rules b{color:var(--gold);}
+
+/* ==================== 游戏台面（墨绿绒面 + 金色双线框） ==================== */
+#gameScreen{
+  background:
+    repeating-linear-gradient(45deg,rgba(0,0,0,.08) 0 1px,transparent 1px 8px),
+    repeating-linear-gradient(-45deg,rgba(0,0,0,.08) 0 1px,transparent 1px 8px),
+    linear-gradient(var(--felt1),var(--felt2));
+}
+#gameScreen::before{
+  content:'';position:absolute;inset:7px;z-index:55;pointer-events:none;
+  border:2px solid var(--gold);border-radius:12px;box-shadow:inset 0 0 0 1px var(--gold);
+}
+#table{position:relative;flex:1;overflow:hidden;z-index:2;}
+#table::before{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(86vw,600px);height:min(56vh,380px);border-radius:50%;
+  border:4px double var(--gold);box-shadow:0 0 0 2px rgba(0,0,0,.25),inset 0 0 0 2px rgba(0,0,0,.25);
+}
+#table::after{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(60vw,420px);height:min(34vh,230px);border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.18),transparent 70%);
+  pointer-events:none;
+}
+
+/* 座位（头像保持原样，仅主题化描边） */
+#seats{position:absolute;inset:44px 0 0 0;pointer-events:none;z-index:3;}
+.seat{position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;transition:transform .2s;}
+.seat .avatar{
+  width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:20px;color:#fff;border:3px solid var(--ink);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.3),3px 3px 0 rgba(0,0,0,.4);position:relative;
+}
+.seat .count{
+  background:var(--ink);border:2px solid var(--gold);
+  color:var(--gold);border-radius:12px;font-size:12px;font-weight:800;padding:1px 7px;
+  min-width:24px;text-align:center;line-height:1.2;
+}
+.seat .name{font-size:12px;font-weight:600;background:var(--ink);color:var(--cream);border:1px solid var(--gold);padding:2px 10px;border-radius:10px;white-space:nowrap;}
+.seat .status{font-size:11px;color:var(--gold);min-height:14px;font-weight:600;}
+/* 进行中状态横幅（庞氏/决斗/亮牌等特殊流程） */
+#flowBanner{
+  position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:7;
+  background:rgba(0,0,0,.78);border:1px solid var(--gold);color:var(--gold);
+  border-radius:20px;padding:6px 18px;font-size:14px;font-weight:700;letter-spacing:.5px;
+  white-space:nowrap;box-shadow:0 2px 14px rgba(0,0,0,.45);
+  display:none;pointer-events:none;animation:flowPulse 1.6s ease-in-out infinite;
+}
+#flowBanner.show{display:block;}
+@keyframes flowPulse{0%,100%{opacity:.7}50%{opacity:1}}
+#handActions{position:absolute;top:-8px;left:50%;transform:translateX(-50%);z-index:8;display:flex;gap:10px;}
+.seat.active .avatar{box-shadow:0 0 0 5px var(--gold),0 0 30px rgba(217,164,65,.7);transform:scale(1.12);}
+.seat.active .name{background:var(--gold);color:var(--ink);border-color:var(--ink);}
+.seat.winner .avatar{animation:pulse 0.8s infinite;}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(81,207,102,.4);}}
+
+/* 头顶效果横幅（玩家被动状态提示） */
+#headFxLayer{position:absolute;inset:0;pointer-events:none;z-index:6;}
+.headfx{
+  position:absolute;transform:translate(-50%,-100%);z-index:6;
+  color:#fff;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:400;white-space:nowrap;
+  font-family:var(--font-display);
+  box-shadow:3px 3px 0 rgba(0,0,0,.35);border:3px solid var(--ink);
+  letter-spacing:.3px;animation:headfxPop .45s ease;
+}
+.headfx.draw{background:#e23b2e;}
+.headfx.skip{background:#d9a441;color:var(--ink);}
+.headfx.mute{background:#6c5ce7;animation:headfxPop .45s ease,headfxFloat 1.6s ease-in-out infinite;}
+.headfx.leaving{opacity:0;transition:opacity .4s ease;}
+@keyframes headfxPop{0%{transform:translate(-50%,-100%) scale(.3);opacity:0;}70%{transform:translate(-50%,-100%) scale(1.15);}100%{transform:translate(-50%,-100%) scale(1);opacity:1;}}
+@keyframes headfxFloat{50%{transform:translate(-50%,-100%) translateY(-3px);}}
+
+/* 中央牌堆 */
+#centerPiles{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:34px;align-items:center;z-index:4;}
+#drawArea{cursor:pointer;}
+#drawArea.pulse .card-back{animation:drawPulse 1s infinite;}
+@keyframes drawPulse{50%{box-shadow:3px 4px 0 var(--ink),0 0 0 8px rgba(217,164,65,.35);transform:translateY(-4px);}}
+#discardArea,#drawArea{position:relative;width:var(--card-w);height:var(--card-h);}
+.pile-under{
+  position:absolute;inset:0;border-radius:var(--card-rad);
+  background:rgba(15,35,24,.4);border:2px solid rgba(217,164,65,.45);
+}
+#drawArea .pile-under{transform:rotate(8deg);background:rgba(15,35,24,.6);}
+
+/* ==================== 卡牌（平涂 + 粗黑描边 + 内侧细环） ==================== */
+.uno-card{
+  width:var(--card-w);height:var(--card-h);border-radius:var(--card-rad);
+  position:absolute;inset:0;border:3px solid var(--ink);
+  box-shadow:3px 4px 0 var(--ink),0 6px 12px rgba(0,0,0,.35);
+  display:flex;flex-direction:column;justify-content:space-between;padding:8px;
+  font-weight:400;font-family:var(--font-display);
+}
+.uno-card::before{
+  content:'';position:absolute;inset:4px;border-radius:7px;pointer-events:none;
+  border:2px solid rgba(255,255,255,.3);
+}
+.uno-card .corner{font-size:22px;line-height:1;position:relative;z-index:2;}
+.uno-card .corner.br{transform:rotate(180deg);align-self:flex-end;}
+.uno-card .face{flex:1;display:flex;align-items:center;justify-content:center;font-size:54px;line-height:1;position:relative;z-index:1;}
+.uno-card .tag{
+  position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
+  font-size:9px;font-weight:700;opacity:.85;letter-spacing:.5px;white-space:nowrap;
+}
+/* 数字牌 */
+.card-red{background:#e23b2e;color:#fff;}
+.card-green{background:#2ea44f;color:#fff;}
+.card-blue{background:#2f7de1;color:#fff;}
+.card-yellow{background:#ffc93c;color:#22170e;}
+.card-yellow::before{border-color:rgba(0,0,0,.16);}
+/* 动作牌 */
+.card-skip .face{font-size:52px;}
+.card-reverse .face{font-size:52px;}
+.card-draw2 .face{font-size:44px;}
+.card-draw2rev .face{font-size:42px;}
+.card-draw2rev{box-shadow:inset 0 0 0 3px rgba(217,164,65,.9);}
+/* 野牌 */
+.card-wild{background:conic-gradient(#e23b2e 0 90deg,#ffc93c 90deg 180deg,#2ea44f 180deg 270deg,#2f7de1 270deg 360deg);color:#fff;}
+.card-wild::before{border-color:rgba(255,255,255,.35);}
+.card-wild .face{font-size:50px;color:rgba(255,255,255,.95);text-shadow:0 2px 6px rgba(0,0,0,.5);}
+.card-wild .corner{color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.6);}
+.card-wild4{background:conic-gradient(#2c3e50 0 90deg,#0f2318 90deg 180deg,#b8862f 180deg 270deg,#7a1f14 270deg 360deg);color:#fff;}
+.card-wild4::before{border-color:rgba(217,164,65,.4);}
+.card-wild4 .face{font-size:40px;color:rgba(255,255,255,.95);text-shadow:0 2px 6px rgba(0,0,0,.55);}
+.card-wild4 .corner{color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.6);}
+/* 机会 0 牌 */
+.card-chance{outline:3px solid var(--gold);outline-offset:-3px;box-shadow:3px 4px 0 var(--ink),0 0 18px rgba(217,164,65,.55);}
+.card-chance::before{border-color:rgba(217,164,65,.5);}
+.card-chance .face{font-size:44px;}
+.card-chance .tag{color:inherit;}
+/* 牌背 */
+.card-back{
+  background:var(--ink);color:var(--gold);
+  align-items:center;justify-content:center;overflow:hidden;
+}
+.card-back::before{display:none;}
+.card-back .back-oval{
+  width:62%;height:40%;border-radius:50%;border:3px solid var(--gold);
+  outline:2px solid var(--gold);outline-offset:2px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:400;letter-spacing:2px;color:var(--gold);
+}
+.card-back .back-oval::before{content:'UNO';}
+
+/* 手牌 */
+#handArea{position:relative;padding:6px 10px 14px;background:linear-gradient(transparent,rgba(15,35,24,.7));z-index:4;border-top:2px solid rgba(217,164,65,.55);}
+#hand{
+  display:flex;justify-content:center;align-items:flex-end;min-height:calc(var(--card-h) + 26px);
+  flex-wrap:nowrap;overflow-x:auto;padding-top:16px;
+}
+#hand .hand-card{
+  position:relative;width:var(--card-w);height:var(--card-h);margin-left:-48px;flex:0 0 auto;
+  transition:transform .18s ease,filter .18s ease;cursor:pointer;transform-origin:bottom center;
+}
+#hand .hand-card:first-child{margin-left:0;}
+#hand .hand-card .uno-card{inset:0;position:absolute;}
+#hand .hand-card:hover{transform:translateY(-14px);z-index:5;}
+#hand .hand-card.selected{transform:translateY(-26px) scale(1.04);z-index:6;box-shadow:0 0 0 3px var(--gold);border-radius:var(--card-rad);}
+#hand .hand-card.playable:hover{filter:brightness(1.12);}
+#hand .hand-card.not-playable{filter:saturate(.55) brightness(.8);}
+#hand .hand-card.not-playable::after{
+  content:'✕';position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;
+  background:var(--danger);border:2px solid var(--ink);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;z-index:7;
+}
+#hand .hand-card.shake{animation:shake .4s;}
+@keyframes shake{25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+#hand .hand-card.dim{opacity:.35;pointer-events:none;}
+#hand .hand-card.rising{animation:rise .6s forwards;}
+@keyframes rise{to{transform:translateY(-140px);opacity:0;}}
+
+/* 飞牌动画元素 */
+.flyer{position:fixed;z-index:100;pointer-events:none;transition:transform .5s cubic-bezier(.3,.8,.3,1),opacity .5s;}
+.flyer.flip{transition:transform .4s cubic-bezier(.5,1.6,.5,1),opacity .4s;}
+
+/* ==================== HUD（金边筹码条） ==================== */
+#hud{
+  position:absolute;top:10px;left:10px;transform:none;z-index:5;
+  display:flex;align-items:center;gap:8px;background:var(--ink);border:2px solid var(--gold);
+  box-shadow:3px 3px 0 rgba(0,0,0,.35);color:var(--cream);
+  padding:6px 12px;border-radius:30px;white-space:nowrap;max-width:94vw;overflow-x:auto;
+}
+.hud-chip{font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px;}
+#colorDot{width:16px;height:16px;border-radius:50%;border:2px solid var(--ink);display:inline-block;box-shadow:0 0 0 2px var(--gold);}
+#dirChip{font-size:16px;font-family:var(--font-display);}
+.hud-btn{padding:4px 10px;border-radius:14px;background:rgba(15,35,24,.5);color:var(--gold);font-size:12px;border:2px solid var(--gold);}
+
+/* ==================== 模态框（墨绿面板 + 金双线） ==================== */
+#modalOverlay{
+  position:fixed;inset:0;background:rgba(5,12,8,.78);display:flex;align-items:center;justify-content:center;
+  z-index:60;backdrop-filter:blur(3px);animation:fadeIn .2s;
+}
+@keyframes fadeIn{from{opacity:0;}}
+#modalContent{
+  background:linear-gradient(160deg,#16452c,#0f2a1e);border:3px solid var(--gold);border-radius:18px;
+  box-shadow:inset 0 0 0 2px var(--gold),0 20px 60px rgba(0,0,0,.6);
+  padding:26px 30px;max-width:440px;width:92vw;max-height:82vh;overflow-y:auto;
+  animation:popIn .22s;color:var(--text);
+}
+@keyframes popIn{from{transform:scale(.92);opacity:0;}}
+.modal-title{font-size:20px;font-weight:400;font-family:var(--font-display);color:var(--gold);margin-bottom:14px;text-align:center;letter-spacing:.5px;}
+.modal-sub{font-size:13px;color:var(--text-dim);line-height:1.8;margin-bottom:16px;}
+.modal-row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap;}
+.modal-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+.modal-card{width:64px;height:96px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:400;font-family:var(--font-display);font-size:24px;border:3px solid var(--ink);box-shadow:2px 3px 0 var(--ink),0 4px 12px rgba(0,0,0,.4);cursor:pointer;transition:.15s;}
+.modal-card:hover{transform:translateY(-6px);}
+.modal-card.selected{outline:3px solid var(--gold);transform:translateY(-6px);}
+.modal-tile{
+  padding:12px 16px;border-radius:12px;background:var(--ink);color:var(--cream);border:2px solid var(--gold);
+  font-size:15px;font-weight:700;min-width:110px;cursor:pointer;transition:.15s;text-align:center;
+}
+.modal-tile:hover{background:var(--gold);color:var(--ink);}
+.modal-tile.danger{background:rgba(226,59,46,.2);border-color:var(--danger);}
+.modal-tile.ok{background:rgba(81,207,102,.18);border-color:var(--ok);}
+.color-opt{width:56px;height:56px;border-radius:50%;cursor:pointer;border:3px solid var(--ink);box-shadow:2px 3px 0 rgba(0,0,0,.4);transition:.15s;}
+.color-opt:hover{transform:scale(1.15);}
+.dice-box{display:flex;gap:16px;justify-content:center;margin:14px 0;}
+.die{
+  width:64px;height:64px;border-radius:14px;background:var(--cream);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;
+  border:3px solid var(--ink);box-shadow:3px 4px 0 var(--ink);animation:diceRoll .5s;
+}
+@keyframes diceRoll{0%{transform:rotate(-180deg) scale(.4);opacity:0;}100%{transform:rotate(0) scale(1);opacity:1;}}
+.big-emoji{font-size:52px;text-align:center;margin:6px 0;}
+.result-line{font-size:14px;line-height:2;text-align:center;color:var(--text);}
+.result-line b{color:var(--gold);font-family:var(--font-display);font-weight:400;}
+
+/* 分数面板 */
+#scorePanel table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;}
+#scorePanel th,#scorePanel td{padding:8px 6px;border-bottom:1px solid rgba(217,164,65,.3);text-align:center;}
+#scorePanel th{color:var(--text-dim);font-weight:600;}
+#scorePanel td:first-child{font-weight:700;}
+.score-leader td{color:var(--gold);font-weight:800;}
+
+/* Toast */
+#toast{
+  position:fixed;top:70px;left:16px;transform:none;z-index:80;
+  background:var(--ink);border:2px solid var(--gold);color:var(--cream);border-radius:30px;
+  box-shadow:3px 4px 0 rgba(0,0,0,.35);
+  padding:10px 22px;font-size:14px;font-weight:600;max-width:min(88vw,380px);text-align:left;
+  opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;
+}
+#toast.show{opacity:1;transform:translateY(4px);}
+
+/* UNO 呼叫 */
+#unoCall{
+  position:absolute;top:-6px;left:50%;transform:translateX(-50%);z-index:8;
+  background:#e23b2e;color:#fff;border:3px solid var(--ink);font-family:var(--font-display);
+  border-radius:26px;padding:10px 22px;font-size:16px;font-weight:400;
+  box-shadow:3px 4px 0 var(--ink),0 6px 20px rgba(226,59,46,.5);
+  animation:unoPulse 0.9s infinite;
+}
+@keyframes unoPulse{50%{transform:translateX(-50%) scale(1.06);}}
+
+/* 通知条 */
+#tableMsg{
+  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:6;
+  background:var(--ink);border:1px solid var(--gold);color:var(--cream);
+  border-radius:16px;padding:7px 16px;font-size:13px;
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis;
+}
+#tableMsg.show{opacity:1;}
+
+/* 响应式 */
+/* ==================== 联机面板 ==================== */
+.mp-divider{font-size:12px;color:var(--text-dim);text-align:center;margin:4px 0 8px;letter-spacing:2px;}
+.mp-row{display:flex;gap:8px;}
+.mp-input{
+  flex:1;background:var(--ink);color:var(--cream);border:2px solid var(--gold);
+  border-radius:8px;padding:8px 10px;font-size:13px;min-width:0;font-family:inherit;
+}
+.mp-input.code{flex:0 0 84px;text-align:center;letter-spacing:2px;}
+.mp-input::placeholder{color:rgba(240,230,208,.4);}
+.mp-check{font-size:12px;color:var(--text-dim);display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.mp-status{font-size:12px;color:var(--gold);min-height:16px;text-align:center;margin-top:2px;}
+.mp-lobby{background:rgba(0,0,0,.35);border:1px solid var(--gold);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+.mp-title{font-size:14px;font-weight:700;color:var(--gold);text-align:center;}
+.mp-seat{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:rgba(0,0,0,.3);font-size:13px;border:1px solid transparent;}
+.mp-seat.you{border-color:var(--gold);background:rgba(217,164,65,.12);}
+.mp-seat-num{color:var(--text-dim);font-size:11px;flex:0 0 auto;}
+.mp-seat-name{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.mp-seat-state{font-size:11px;color:var(--text-dim);flex:0 0 auto;}
+
+@media (max-width:700px){
+  :root{--card-w:76px;--card-h:114px;--card-rad:9px;}
+  .uno-card .face{font-size:38px;}
+  .uno-card .corner{font-size:16px;}
+  .uno-card .tag{display:none;}
+  #startScreen .logo{font-size:64px;}
+  #centerPiles{gap:18px;}
+  #hand .hand-card{margin-left:-34px;}
+  #hand{min-height:calc(var(--card-h) + 22px);}
+  .seat .avatar{width:40px;height:40px;font-size:15px;}
+  .seat .count{font-size:10px;min-width:18px;padding:1px 5px;}
+  .seat .name{font-size:10px;padding:1px 7px;}
+  .seat .status{font-size:10px;}
+}
+@media (max-width:420px){
+  :root{--card-w:62px;--card-h:93px;}
+  .uno-card .face{font-size:30px;}
+  .uno-card .corner{font-size:13px;}
+  #centerPiles{gap:12px;}
+  #hand .hand-card{margin-left:-27px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 开始界面 -->
+<div id="startScreen" class="screen">
+  <div class="logo"><span>UNO</span></div>
+  <p class="tagline">战 AI · 玩特殊规则 · 手牌满 30 张进入结算</p>
+  <div class="start-box">
+    <label>玩家数量
+      <select id="playerCount">
+        <option value="3">3 人（你 + 2 AI）</option>
+        <option value="4" selected>4 人（你 + 3 AI）</option>
+        <option value="5">5 人（你 + 4 AI）</option>
+        <option value="6">6 人（你 + 5 AI）</option>
+      </select>
+    </label>
+    <label>AI 思考速度
+      <input type="range" id="aiSpeed" min="0.6" max="2" step="0.1" value="1.2">
+    </label>
+    <div class="btn-row">
+      <button class="btn" id="btnTheme">🌗 主题</button>
+      <button class="btn" id="btnSound">🔊 声音</button>
+    </div>
+    <button class="btn primary" id="btnStart">开 始 游 戏</button>
+    <details class="rules">
+      <summary>特殊规则说明</summary>
+      <div class="rules-body">
+        <b>不幸13</b>：抽牌后手牌恰好 13 张 → 再抽 13 张。<br>
+        <b>机会 0</b>：正常出牌时打出数字「0」，随机触发 8 种活动之一：<br>
+        ▸ <b>庞氏骗局</b>：继续出牌，第一个被迫抽牌者抽「期间所有出牌+抽牌数」张。<br>
+        ▸ <b>德州扑克</b>：选对手比数字，小者抽「较大数字」张；平局无事。<br>
+        ▸ <b>火攻</b>：选对手比颜色，颜色相同你抽4，不同对手抽4。<br>
+        ▸ <b>闪电</b>：掷两颗骰子，按点数决定谁抽多少张。<br>
+        ▸ <b>决斗</b>：指定颜色与对手对决，先无法出牌者抽「期间出牌数」张。<br>
+        ▸ <b>铁索连环</b>：与对家形成风险共同体，任一方被罚抽牌时另一方同受，一次后解除。<br>
+        ▸ <b>桃源结义</b>：所有人轮流丢弃最多一半手牌。<br>
+        ▸ <b>五谷丰登</b>：所有人轮流丢弃所有与「0」同色的牌。<br>
+        <b>UNO</b>：剩 1 张时须喊 UNO，被捉到漏喊抽 2 张。<br>
+        <b>计分</b>：数字=面值，动作牌=20，野牌=50；任一玩家手牌达到 <b>30 张</b> 时立即结算，先比手牌数、再比手牌点数；每轮得分累计，先达 <b>500 分</b> 获胜。
+      </div>
+    </details>
+
+    <div class="mp-divider">━━ 局域网联机 ━━</div>
+    <div class="mp-row">
+      <input id="mpName" class="mp-input" maxlength="12" placeholder="昵称" value="">
+      <input id="mpRoomCode" class="mp-input code" maxlength="4" placeholder="4位码">
+    </div>
+    <div class="mp-row">
+      <select id="mpPlayers" class="mp-input">
+        <option value="4" selected>4 人桌</option>
+        <option value="2">2 人</option>
+        <option value="3">3 人</option>
+        <option value="5">5 人</option>
+        <option value="6">6 人</option>
+      </select>
+      <label class="mp-check"><input type="checkbox" id="mpAiFill" checked> AI 补位</label>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="btnCreateRoom">创建房间</button>
+      <button class="btn" id="btnJoinRoom">加入房间</button>
+    </div>
+    <div id="mpStatus" class="mp-status"></div>
+    <div id="mpLobby" class="mp-lobby hidden">
+      <div class="mp-title" id="mpRoomTitle"></div>
+      <div id="mpSeats"></div>
+      <div class="btn-row">
+        <button class="btn primary" id="btnMpStart">开始游戏</button>
+        <button class="btn" id="btnMpReady">就绪</button>
+        <button class="btn" id="btnMpLeave">离开房间</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 游戏界面 -->
+<div id="gameScreen" class="screen hidden">
+  <div id="hud">
+    <span class="hud-chip"><span id="colorDot"></span><span id="colorName">红</span></span>
+    <span class="hud-chip" id="dirChip">↻ 顺</span>
+    <span class="hud-chip" id="roundInfo">第 1 轮</span>
+    <button class="hud-btn" id="btnScores">🏆 分数</button>
+    <button class="hud-btn" id="btnTheme2">🌗</button>
+    <button class="hud-btn" id="btnSound2">🔊</button>
+    <button class="hud-btn" id="btnRestart">↺</button>
+  </div>
+
+  <div id="table">
+    <div id="seats"></div>
+    <div id="headFxLayer"></div>
+    <div id="centerPiles">
+      <div id="discardArea"></div>
+      <div id="drawArea" title="点击抽牌">
+        <div class="pile-under"></div>
+        <div class="uno-card card-back" id="drawPile"><div class="back-oval"></div></div>
+      </div>
+    </div>
+    <div id="tableMsg"></div>
+    <div id="flowBanner" class="flow-banner"></div>
+  </div>
+
+  <div id="handArea">
+    <div id="handActions">
+      <button id="btnPass" class="btn hidden">结束回合</button>
+      <button id="btnCatchUno" class="btn hidden" style="border-color:var(--danger);color:var(--danger);">🔔 捉 UNO!</button>
+    </div>
+    <div id="unoCall" class="hidden"></div>
+    <div id="hand"></div>
+  </div>
+</div>
+
+<div id="modalOverlay" class="hidden"><div id="modalContent"></div></div>
+<div id="toast"></div>
+
+<script src="uno-core.js"></script>
+<script>
+"use strict";
+/* ================================================================
+ * UI / 渲染 / 交互（依赖 DOM，UNOCore 由 uno-core.js 提供全局）
+ * ================================================================ */
+const S = {
+  g: null,
+  settings: { theme: 'dark', muted: false, aiSpeed: 1.2 },
+  aiTimer: null,
+  flowTimer: null,
+  humanCanAct: false,
+  selectedIdx: -1,
+  doneCardId: null,
+};
+
+/* ---------- 多人模式状态 ---------- */
+let MODE = 'solo';        // 'solo' | 'multi'
+let WS = null;
+let mySeat = -1;
+let host = false;
+let lobby = null;
+let mpPlayDrawn = false;  // 抽到可打出的牌后可过牌
+
+/* ---------- 设置 ---------- */
+function loadSettings() {
+  try {
+    const raw = localStorage.getItem('uno.settings');
+    if (raw) return Object.assign({ theme: 'dark', muted: false, aiSpeed: 1.2 }, JSON.parse(raw));
+  } catch (e) {}
+  return { theme: 'dark', muted: false, aiSpeed: 1.2 };
+}
+function saveSettings() {
+  try { localStorage.setItem('uno.settings', JSON.stringify(S.settings)); } catch (e) {}
+}
+function applyTheme() {
+  document.body.classList.toggle('theme-light', S.settings.theme === 'light');
+}
+function toggleTheme() {
+  S.settings.theme = S.settings.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(); saveSettings();
+  sfx('click');
+}
+function toggleSound() {
+  S.settings.muted = !S.settings.muted;
+  saveSettings(); updateSoundBtns(); sfx('click');
+}
+function updateSoundBtns() {
+  const icon = S.settings.muted ? '🔇' : '🔊';
+  byId('btnSound').textContent = icon + ' 声音';
+  byId('btnSound2').textContent = icon;
+}
+function byId(id) { return document.getElementById(id); }
+
+/* ---------- 音效（WebAudio，无外部资源） ---------- */
+let actx = null;
+const noiseBuffers = Object.create(null);
+function ensureAudio() {
+  if (!actx) {
+    try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
+  }
+  if (actx && actx.state === 'suspended') actx.resume();
+}
+function randomBetween(min, max) { return min + Math.random() * (max - min); }
+function getNoiseBuffer(duration) {
+  const key = String(Math.round(duration * 1000));
+  if (noiseBuffers[key]) return noiseBuffers[key];
+  const length = Math.max(1, Math.ceil(actx.sampleRate * duration));
+  const buffer = actx.createBuffer(1, length, actx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < length; i++) {
+    const fade = 1 - i / length;
+    data[i] = (Math.random() * 2 - 1) * (0.7 + fade * 0.3);
+  }
+  noiseBuffers[key] = buffer;
+  return buffer;
+}
+function tone(freq, dur, type, vol, when) {
+  if (S.settings.muted || !actx) return;
+  const t0 = actx.currentTime + (when || 0);
+  const osc = actx.createOscillator();
+  const gain = actx.createGain();
+  osc.type = type || 'sine';
+  osc.frequency.setValueAtTime(freq, t0);
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(vol || 0.12, t0 + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  osc.connect(gain); gain.connect(actx.destination);
+  osc.start(t0); osc.stop(t0 + dur + 0.02);
+}
+function noiseBurst(dur, filterType, freq, vol, when, q) {
+  if (S.settings.muted || !actx) return;
+  const t0 = actx.currentTime + (when || 0);
+  const source = actx.createBufferSource();
+  const filter = actx.createBiquadFilter();
+  const gain = actx.createGain();
+  const attack = Math.min(0.008, dur * 0.2);
+  source.buffer = getNoiseBuffer(dur);
+  filter.type = filterType || 'bandpass';
+  filter.frequency.setValueAtTime(freq || 1600, t0);
+  filter.Q.setValueAtTime(q || 0.9, t0);
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(vol || 0.08, t0 + attack);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  source.connect(filter); filter.connect(gain); gain.connect(actx.destination);
+  source.start(t0); source.stop(t0 + dur + 0.02);
+}
+function sfx(name) {
+  ensureAudio();
+  switch (name) {
+    case 'deal':
+      noiseBurst(.08, 'bandpass', 1700, .06);
+      tone(520, .08, 'triangle', .08);
+      tone(660, .08, 'triangle', .08, .09);
+      break;
+    case 'play': {
+      const pitch = randomBetween(.94, 1.06);
+      // 低频落桌 + 纸面瞬态 + 轻微边缘摩擦，模拟卡牌拍桌。
+      tone(116 * pitch, .15, 'sine', .13);
+      tone(205 * pitch, .09, 'triangle', .045, .006);
+      noiseBurst(.105, 'bandpass', randomBetween(1500, 2300), .105, .003, 1.1);
+      noiseBurst(.025, 'highpass', randomBetween(3800, 5200), .045, .008, .7);
+      break;
+    }
+    case 'draw': {
+      const pitch = randomBetween(.95, 1.05);
+      // 抽出时的纸面摩擦，随后是轻柔的接牌声。
+      noiseBurst(.16, 'bandpass', randomBetween(850, 1250), .085, 0, .8);
+      noiseBurst(.035, 'highpass', randomBetween(3200, 4600), .035, .045, .7);
+      tone(155 * pitch, .14, 'sine', .075, .075);
+      tone(245 * pitch, .1, 'triangle', .04, .12);
+      break;
+    }
+    case 'win': [523,659,784,1047].forEach((f,i)=>tone(f,.16,'triangle',.13,i*.12)); break;
+    case 'lose': [400,330,262,196].forEach((f,i)=>tone(f,.18,'sine',.12,i*.13)); break;
+    case 'uno': tone(880,.15,'square',.12); tone(1174,.2,'square',.12,.13); break;
+    case 'chance': tone(700,.12,'triangle',.12); tone(900,.12,'triangle',.12,.1); tone(1100,.18,'triangle',.12,.2); break;
+    case 'error': tone(180,.18,'sawtooth',.09); tone(140,.22,'sawtooth',.09,.12); break;
+    case 'click': tone(600,.05,'sine',.06); break;
+  }
+}
+
+/* ---------- 卡牌 HTML 构建 ---------- */
+function cardLabel(c) {
+  if (c.type === 'number') return c.value;
+  if (c.value === 'skip') return '⊘';
+  if (c.value === 'reverse') return '⇄';
+  if (c.value === 'draw2') return '+2';
+  if (c.value === 'draw2rev') return '+2⇄';
+  if (c.value === 'wild4') return '+4';
+  return '★';
+}
+function faceHTML(c) {
+  if (c.type === 'number') return c.value === '0' ? '0' : c.value;
+  if (c.value === 'skip') return '⊘';
+  if (c.value === 'reverse') return '⇄';
+  if (c.value === 'draw2') return '+2';
+  if (c.value === 'draw2rev') return '+2⇄';
+  if (c.value === 'wild4') return '+4';
+  return '★';
+}
+function cardClass(c) {
+  if (c.type === 'wild') return 'card-wild';
+  if (c.type === 'wild4') return 'card-wild4';
+  return 'card-' + c.color;
+}
+function cardHTML(c) {
+  let cls = 'uno-card ' + cardClass(c);
+  if (c.type === 'action') cls += ' card-' + c.value;
+  if (c.type === 'number' && c.value === '0') cls += ' card-chance';
+  const label = cardLabel(c);
+  const tag = (c.type === 'number' && c.value === '0') ? '<span class="tag">機會</span>' : '';
+  return '<div class="' + cls + '">' +
+    '<span class="corner">' + label + '</span>' +
+    '<div class="face">' + faceHTML(c) + '</div>' +
+    '<span class="corner br">' + label + '</span>' +
+    tag + '</div>';
+}
+function cardBackHTML() {
+  return '<div class="uno-card card-back"><div class="back-oval"></div></div>';
+}
+
+/* ---------- 动画：飞牌 ---------- */
+function flyTo(srcEl, dstEl, innerHTML, duration) {
+  return new Promise(resolve => {
+    if (!srcEl || !dstEl) { resolve(); return; }
+    const sr = srcEl.getBoundingClientRect();
+    const dr = dstEl.getBoundingClientRect();
+    const w = sr.width || 80, h = sr.height || 120;
+    const flyer = document.createElement('div');
+    flyer.className = 'flyer';
+    flyer.innerHTML = '<div style="position:relative;width:' + w + 'px;height:' + h + 'px">' + innerHTML + '</div>';
+    flyer.style.left = (sr.left + sr.width / 2) + 'px';
+    flyer.style.top = (sr.top + sr.height / 2) + 'px';
+    flyer.style.transform = 'translate(-50%,-50%) scale(1)';
+    document.body.appendChild(flyer);
+    const dx = (dr.left + dr.width / 2) - (sr.left + sr.width / 2);
+    const dy = (dr.top + dr.height / 2) - (sr.top + sr.height / 2);
+    const anim = flyer.animate([
+      { transform: 'translate(-50%,-50%) scale(1)' },
+      { transform: 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px)) scale(.5)', opacity: 1 },
+    ], { duration: duration || 460, easing: 'cubic-bezier(.3,.8,.3,1)' });
+    anim.onfinish = function () { flyer.remove(); resolve(); };
+  });
+}
+
+/* ---------- 座位布局 ---------- */
+const SEAT_MAP = {
+  3: [[17, 20], [83, 20]],
+  4: [[12, 40], [50, 12], [88, 40]],
+  5: [[13, 21], [39, 12], [61, 12], [87, 21]],
+  6: [[8, 40], [16, 20], [50, 12], [84, 20], [92, 40]],
+};
+const AVATAR_COLORS = ['#e63946', '#f4a261', '#2a9d8f', '#9b5de5', '#f77f00', '#00b4d8'];
+function seatPos(i, total) {
+  if (i === 0) return [50, 92];
+  const list = SEAT_MAP[total];
+  return list ? list[i - 1] : [50, 10];
+}
+function handSizeOf(p) { return p.handCount != null ? p.handCount : (p.hand ? p.hand.length : 0); }
+
+function renderSeats() {
+  const g = S.g;
+  const el = byId('seats');
+  el.innerHTML = '';
+  for (let i = 0; i < g.numPlayers; i++) {
+    const p = g.players[i];
+    const [x, y] = seatPos(i, g.numPlayers);
+    const seat = document.createElement('div');
+    seat.className = 'seat';
+    seat.id = 'seat-' + i;
+    seat.style.left = x + '%';
+    seat.style.top = y + '%';
+    seat.style.transform = 'translate(-50%,-50%)';
+    const color = AVATAR_COLORS[i % AVATAR_COLORS.length];
+    const avatarFace = i === 0 ? '😎' : (p.name.split(' ').slice(-1)[0]);
+    seat.innerHTML =
+      '<div class="avatar" style="background:' + color + '">' +
+        avatarFace +
+      '</div>' +
+      '<span class="count">' + handSizeOf(p) + '</span>' +
+      '<div class="name">' + p.name + '</div>' +
+      '<div class="status"></div>';
+    el.appendChild(seat);
+  }
+}
+function seatEl(i) { return byId('seat-' + i); }
+function setStatus(i, text) {
+  const seat = seatEl(i);
+  if (!seat) return;
+  const st = seat.querySelector('.status');
+  if (st) st.textContent = text || '';
+}
+function setActiveSeat(i) {
+  for (let k = 0; k < S.g.numPlayers; k++) {
+    const s = seatEl(k);
+    if (s) s.classList.toggle('active', k === i);
+  }
+}
+
+/* ---------- 提示与 Toast ---------- */
+let msgTimer = null;
+function setMsg(text) {
+  const m = byId('tableMsg');
+  m.textContent = text;
+  m.classList.add('show');
+  clearTimeout(msgTimer);
+  msgTimer = setTimeout(function () { m.classList.remove('show'); }, 2600);
+}
+let toastTimer = null;
+function toast(text, dur) {
+  const t = byId('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { t.classList.remove('show'); }, dur || 2200);
+}
+function setStatusLine(idx, text) { setStatus(idx, text); }
+
+/* ---------- 头顶效果横幅 ---------- */
+function showHeadFx(idx, kind, opts) {
+  const o = opts || {};
+  const seat = seatEl(idx);
+  const layer = byId('headFxLayer');
+  if (!seat || !layer) return;
+  const sRect = seat.getBoundingClientRect();
+  const lRect = layer.getBoundingClientRect();
+  const el = document.createElement('div');
+  el.className = 'headfx ' + (kind === 'skip' ? 'skip' : kind === 'mute' ? 'mute' : 'draw');
+  el.textContent = kind === 'draw' ? '🃏 抽 ' + o.count : (kind === 'skip' ? '⛔ 跳过' : '🔇 禁言');
+  el.dataset.seat = idx;
+  // 同一座位已有横幅时依次上移堆叠
+  const stack = layer.querySelectorAll('.headfx[data-seat="' + idx + '"]').length;
+  el.style.left = (sRect.left - lRect.left + sRect.width / 2) + 'px';
+  el.style.top = (sRect.top - lRect.top - stack * 28 - 6) + 'px';
+  layer.appendChild(el);
+  if (kind !== 'mute') {
+    const dur = o.dur || 1600;
+    setTimeout(function () { el.classList.add('leaving'); }, Math.max(0, dur - 420));
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, dur);
+  }
+}
+
+/* 常驻禁言横幅对账：铁索形成时显示，断链时移除 */
+function syncHeadFx() {
+  const layer = byId('headFxLayer');
+  if (!layer) return;
+  const want = new Set();
+  if (S.g && S.g.ironChain) { want.add(S.g.ironChain.a); want.add(S.g.ironChain.b); }
+  Array.prototype.slice.call(layer.querySelectorAll('.headfx.mute')).forEach(function (el) {
+    if (!want.has(parseInt(el.dataset.seat, 10))) el.remove();
+  });
+  want.forEach(function (idx) {
+    if (!layer.querySelector('.headfx.mute[data-seat="' + idx + '"]')) showHeadFx(idx, 'mute');
+  });
+}
+
+/* ---------- 模态框工具 ---------- */
+function openModal(html) {
+  byId('modalOverlay').classList.remove('hidden');
+  byId('modalContent').innerHTML = html;
+}
+function closeModal() {
+  byId('modalOverlay').classList.add('hidden');
+  byId('modalContent').innerHTML = '';
+}
+function modalTitle(t) { return '<div class="modal-title">' + t + '</div>'; }
+function modalSub(s) { return '<div class="modal-sub">' + s + '</div>'; }
+
+/* ---------- 颜色选择器 ---------- */
+function openColorPicker(onPick, title) {
+  ensureAudio();
+  S._colorCb = onPick;
+  const names = { red: '红', green: '绿', blue: '蓝', yellow: '黄' };
+  const hex = { red: '#e23b2e', green: '#2ea44f', blue: '#2f7de1', yellow: '#ffc93c' };
+  let html = modalTitle(title || '选择颜色');
+  html += '<div class="modal-row">';
+  UNOCore.COLORS.forEach(function (c) {
+    html += '<div class="color-opt" style="background:' + hex[c] + '" onclick="UNO.pickColor(\'' + c + '\')" title="' + names[c] + '"></div>';
+  });
+  html += '</div>';
+  openModal(html);
+}
+
+/* ---------- HUD ---------- */
+function renderHud() {
+  const g = S.g;
+  const dot = byId('colorDot');
+  const hex = { red: '#e23b2e', green: '#2ea44f', blue: '#2f7de1', yellow: '#ffc93c', null: '#888' };
+  dot.style.background = hex[g.activeColor] || '#888';
+  byId('colorName').textContent = UNOCore.COLOR_NAME[g.activeColor] || '—';
+  byId('dirChip').textContent = g.dir === 1 ? '↻ 顺' : '↺ 逆';
+  byId('roundInfo').textContent = '第 ' + g.round + ' 轮';
+}
+
+/* ---------- 中央牌堆 ---------- */
+function discardEl() {
+  let d = byId('discardArea');
+  if (!d) return null;
+  return d;
+}
+function drawEl() { return byId('drawArea'); }
+function renderCenter() {
+  const g = S.g;
+  const top = g.discard[g.discard.length - 1];
+  const da = byId('discardArea');
+  da.innerHTML = '<div class="pile-under"></div>' + (top ? cardHTML(top) : '');
+  byId('drawPile').className = 'uno-card card-back';
+  byId('drawPile').innerHTML = '<div class="back-oval"></div>';
+}
+function pulseDraw(on) {
+  byId('drawArea').classList.toggle('pulse', !!on);
+}
+
+/* ---------- 手牌 ---------- */
+function renderHand() {
+  const g = S.g;
+  const p = g.players[0];
+  const el = byId('hand');
+  el.innerHTML = '';
+  p.hand.forEach(function (c, i) {
+    const wrap = document.createElement('div');
+    wrap.className = 'hand-card';
+    wrap.dataset.idx = i;
+    // 接龙中：只高亮 +2/+4
+    const inStack = g.drawStack && g.current === 0;
+    const ok = inStack ? UNOCore.isDrawStackCard(c)
+      : g.duel ? UNOCore.duelPlayableIndexes(p.hand, g.activeColor, g.activeValue).includes(i)
+      : UNOCore.legalPlayable(c, p.hand, g.activeColor, g.activeValue);
+    wrap.classList.add(ok ? 'playable' : 'not-playable');
+    if (i === S.selectedIdx) wrap.classList.add('selected');
+    wrap.innerHTML = cardHTML(c);
+    wrap.addEventListener('click', function () { onHandClick(i, wrap); });
+    el.appendChild(wrap);
+  });
+  renderUnoCall();
+}
+function handCardEl(i) {
+  const cards = byId('hand').children;
+  return cards[i] || null;
+}
+function shake(el) {
+  if (!el) return;
+  el.classList.remove('shake');
+  void el.offsetWidth;
+  el.classList.add('shake');
+}
+
+/* ---------- UNO 呼叫 ---------- */
+function renderUnoCall() {
+  const g = S.g;
+  const p = g.players[0];
+  const el = byId('unoCall');
+  if (p.hand.length === 1 && !p.calledUno) {
+    el.classList.remove('hidden');
+    el.innerHTML = 'UNO! <button class="hud-btn" id="unoBtn" style="background:rgba(0,0,0,.35);color:#fff;margin-left:6px;">喊 UNO</button>';
+    const btn = byId('unoBtn');
+    if (btn) btn.addEventListener('click', function () {
+      if (MODE === 'multi') {
+        sendMsg({ type: 'action', action: 'callUno' });
+        el.classList.add('hidden');
+        return;
+      }
+      p.calledUno = true; p.uno = false;
+      sfx('uno'); toast('UNO!'); el.classList.add('hidden');
+    });
+  } else {
+    el.classList.add('hidden');
+  }
+}
+
+/* ---------- 回合流程 ---------- */
+function clearAI() {
+  clearTimeout(S.aiTimer);
+  clearTimeout(S.flowTimer);
+  S.aiTimer = null; S.flowTimer = null;
+}
+
+/* 进行中状态横幅：多人=服务器流程 / 庞氏 / 决斗；单人=庞氏 / 决斗 */
+function updateFlowBanner() {
+  const el = byId('flowBanner');
+  if (!el) return;
+  let text = '';
+  const g = S.g;
+  if (g && g.flow && g.flow.text) text = g.flow.text;
+  else if (g && g.drawStack) text = '🔗 接龙中：累计 ' + g.drawStack.count + ' 张';
+  else if (g && g.ponzi) text = '💸 庞氏骗局进行中';
+  else if (g && g.duel) {
+    const a = g.players[g.duel.a], b = g.players[g.duel.b];
+    text = '⚔ 决斗进行中：' + (a ? a.name : '?') + ' 对 ' + (b ? b.name : '?') + '（' + (UNOCore.COLOR_NAME[g.duel.color] || '') + '色）';
+  }
+  el.textContent = text;
+  el.classList.toggle('show', !!text);
+}
+
+function renderAll() {
+  const g = S.g;
+  if (!g) return;
+  renderSeats();
+  setActiveSeat(g.current);
+  renderCenter();
+  renderHand();
+  renderHud();
+  updateSoundBtns();
+  renderCatchUno();
+  if (g.ironChain) {
+    const c = g.ironChain;
+    setStatus(c.a, '⛓ 铁索');
+    setStatus(c.b, '⛓ 铁索');
+  }
+  syncHeadFx();
+  updateFlowBanner();
+}
+
+function beginTurn() {
+  clearAI();
+  const g = S.g;
+  S.humanCanAct = false;
+  S.selectedIdx = -1;
+  S.drewThisTurn = false;
+  showPassButton(false);
+  if (S.pendingCatch === g.current) S.pendingCatch = null;
+  renderAll();
+  const p = g.players[g.current];
+  // 接龙中：当前玩家只能接 +2/+4 或抓累计张数
+  if (g.drawStack && g.current === g.drawStack.target) {
+    if (!p.isAI) {
+      S.humanCanAct = true;
+      setStatus(0, '接龙中');
+      setMsg('接龙中！可出 +2/+4 接龙，或抓 ' + g.drawStack.count + ' 张');
+      pulseDraw(true);
+    } else {
+      setStatus(g.current, '思考中…');
+      S.aiTimer = setTimeout(aiTurn, S.settings.aiSpeed * 2500);
+    }
+    return;
+  }
+  if (!p.isAI) {
+    S.humanCanAct = true;
+    setStatus(0, '轮到你');
+    if (!UNOCore.hasPlayable(p.hand, g.activeColor, g.activeValue)) {
+      setMsg('没有可出的牌，点击牌堆抽一张');
+      pulseDraw(true);
+    }
+  } else {
+    setStatus(g.current, '思考中…');
+    S.aiTimer = setTimeout(aiTurn, S.settings.aiSpeed * 2500); // 默认 1.2 → 停顿 3 秒
+  }
+}
+
+function aiTurn() {
+  const g = S.g;
+  const idx = g.current;
+  const p = g.players[idx];
+  // 接龙中：AI 有 +2/+4 就接，否则抓累计张数
+  if (g.drawStack && g.drawStack.target === idx) {
+    const dec = UNOCore.aiDecideStack(p.hand);
+    if (dec) doPlay(idx, dec.index, dec.color);
+    else drawStackFlow(idx);
+    return;
+  }
+  // AI 捉玩家漏喊 UNO
+  if (S.missedUno && !g.players[0].calledUno && g.players[0].hand.length === 1 && Math.random() < 0.4) {
+    S.missedUno = false;
+    UNOCore.draw(g, 0, 2);
+    renderAll();
+    showHeadFx(0, 'draw', { count: 2 });
+    setMsg('🔔 AI 捉到你漏喊 UNO！罚抽 2 张');
+    sfx('error');
+    if (maybeHandLimitEnd()) return;
+  }
+  if (S.g.duel) {
+    // 决斗中：AI 判断是否可出
+    const playable = UNOCore.duelPlayableIndexes(p.hand, g.activeColor, g.activeValue);
+    if (playable.length === 0) {
+      setStatus(idx, '无法出牌');
+      finishDuelDraw(idx);
+    } else {
+      const dec = UNOCore.aiDecide(p.hand, g.activeColor, g.activeValue);
+      doPlay(idx, dec.index, dec.color);
+    }
+    return;
+  }
+  const dec = UNOCore.aiDecide(p.hand, g.activeColor, g.activeValue);
+  if (dec) {
+    doPlay(idx, dec.index, dec.color);
+  } else {
+    doDraw(idx);
+  }
+}
+
+/* 统一出牌流程（人类与 AI 共用） */
+function doPlay(idx, cardIdx, chosenColor) {
+  S.humanCanAct = false;
+  const g = S.g;
+  const res = UNOCore.playCard(g, idx, cardIdx, chosenColor);
+  if (!res.ok) {
+    toast(res.error);
+    sfx('error');
+    if (idx === 0) { S.humanCanAct = true; renderAll(); }
+    return;
+  }
+  // 动画：牌飞向弃牌堆
+  const src = idx === 0 ? handCardEl(cardIdx) : seatEl(idx);
+  flyTo(src, discardEl(), cardHTML(res.card)).then(function () {
+    sfx('play');
+    afterPlay(idx, res);
+  });
+}
+
+function afterPlay(idx, res) {
+  const g = S.g;
+  const eff = res.effects;
+  // UNO 追踪
+  const p = g.players[idx];
+  if (p.hand.length === 1 && !p.calledUno) {
+    if (idx === 0) {
+      S.missedUno = true;
+    } else {
+      if (Math.random() < 0.85) {
+        p.calledUno = true; p.uno = false;
+        setStatus(idx, 'UNO!');
+        sfx('uno');
+      } else {
+        S.pendingCatch = idx;
+      }
+    }
+  }
+  if (res.stack) {
+    // 接龙：已开启或延续，轮到新的目标玩家
+    toast('接龙！累计 ' + res.stack.count + ' 张，轮到 ' + g.players[g.current].name);
+    sfx('chance');
+    renderAll();
+    beginTurn();
+    return;
+  }
+  if (res.card && res.card.type === 'number' && res.card.value === '0' && res.chanceZero) {
+    // 机会活动流程
+    runChanceFlow(idx, res.activity);
+    return;
+  }
+  if (eff.reversed) toast('方向反转 ↺');
+  if (eff.skipped != null) setStatus(eff.skipped, '被跳过');
+  if (eff.drew && eff.drew.length > 0) {
+    setMsg(g.players[eff.skipped].name + ' 抽了 ' + eff.drew.length + ' 张牌');
+    sfx('draw');
+  }
+  if (eff.chainShared) {
+    toast('⛓ 铁索连环！' + g.players[eff.chainShared.partner].name + ' 同受 ' + eff.chainShared.count + ' 张');
+  }
+  if (eff.unlucky13) toast('☠ 不幸 13！额外抽 13 张');
+  // 头顶效果：被跳过 / 被罚抽牌（+2/+4 的目标玩家两者同时）
+  if (eff.skipped != null) showHeadFx(eff.skipped, 'skip');
+  if (eff.drew && eff.drew.length > 0) showHeadFx(eff.skipped, 'draw', { count: eff.drew.length });
+  if (eff.chainShared) showHeadFx(eff.chainShared.partner, 'draw', { count: eff.chainShared.count });
+  if (res.win) { roundEndFlow(idx); return; }
+  if (maybeHandLimitEnd()) return;
+  if (g.duel) {
+    renderAll();
+    beginTurn();
+    return;
+  }
+  renderAll();
+  beginTurn();
+}
+
+/* 统一抽牌流程 */
+function doDraw(idx, isVoluntary) {
+  S.humanCanAct = false;
+  const g = S.g;
+  pulseDraw(false);
+  // 庞氏骗局：第一个被迫抽牌者
+  const ponziTrigger = !!g.ponzi && !isVoluntary;
+  const dopts = {};
+  const src = byId('drawPile');
+  const dst = idx === 0 ? byId('hand') : seatEl(idx);
+  sfx('draw');
+  flyTo(src, dst, cardBackHTML(), 420).then(function () {
+    const drawn = UNOCore.draw(g, idx, 1, Object.assign({ ponziTrigger: ponziTrigger }, dopts));
+    S.doneCardId = drawn.length ? UNOCore.cardKey(drawn[0]) : null;
+    afterDraw(idx, drawn, dopts);
+  });
+}
+
+function advanceTurn() {
+  S.g.current = UNOCore.nextIndex(S.g, 1);
+}
+
+/* 接龙结算：目标玩家抓累计张数，被跳过，回合交给其下家 */
+function drawStackFlow(idx) {
+  S.humanCanAct = false;
+  const g = S.g;
+  pulseDraw(false);
+  const src = byId('drawPile');
+  const dst = idx === 0 ? byId('hand') : seatEl(idx);
+  sfx('draw');
+  flyTo(src, dst, cardBackHTML(), 420).then(function () {
+    afterStackDraw(idx, UNOCore.drawStack(g, idx));
+  });
+}
+
+function afterStackDraw(idx, res) {
+  const g = S.g;
+  if (!res.ok) { S.humanCanAct = true; renderAll(); return; }
+  setMsg(g.players[idx].name + ' 抓了 ' + res.count + ' 张牌，被跳过');
+  setStatus(idx, '被跳过');
+  showHeadFx(idx, 'skip');
+  showHeadFx(idx, 'draw', { count: res.count });
+  if (res.chainShared) {
+    toast('⛓ 铁索连环！' + g.players[res.chainShared.partner].name + ' 同受 ' + res.chainShared.count + ' 张');
+    showHeadFx(res.chainShared.partner, 'draw', { count: res.chainShared.count });
+  }
+  if (res.ponziEnded) {
+    toast('💸 庞氏骗局爆发！' + g.players[idx].name + ' 抽 ' + res.ponziEnded.X + ' 张');
+    showHeadFx(idx, 'draw', { count: res.ponziEnded.X });
+  }
+  if (res.unlucky13) toast('☠ 不幸 13！额外抽 13 张');
+  renderAll();
+  if (maybeHandLimitEnd()) return;
+  beginTurn();
+}
+
+function afterDraw(idx, drawn, dopts) {
+  const g = S.g;
+  if (dopts._ponziEnded) {
+    toast('💸 庞氏骗局爆发！' + g.players[idx].name + ' 抽 ' + dopts._ponziEnded.X + ' 张');
+    showHeadFx(idx, 'draw', { count: dopts._ponziEnded.X });
+    sfx('draw');
+  } else if (dopts._unlucky13) {
+    toast('☠ 不幸 13！' + g.players[idx].name + ' 额外抽 13 张');
+    showHeadFx(idx, 'draw', { count: 13 });
+  } else if (dopts._chainShared) {
+    toast('⛓ 铁索连环！' + g.players[dopts._chainShared.partner].name + ' 同受 ' + dopts._chainShared.count + ' 张');
+    showHeadFx(dopts._chainShared.partner, 'draw', { count: dopts._chainShared.count });
+  }
+  renderAll();
+  if (maybeHandLimitEnd()) return;
+  const p = g.players[idx];
+  if (g.duel) {
+    finishDuelDraw(idx);
+    return;
+  }
+  if (dopts._ponziEnded) {
+    // 庞氏结束：惩罚性抽牌，回合推进
+    advanceTurn();
+    renderAll();
+    beginTurn();
+    return;
+  }
+  const playable = UNOCore.playableIndexes(p.hand, g.activeColor, g.activeValue);
+  const canPlayDrawn = drawn.length === 1 && playable.includes(p.hand.length - 1);
+  if (idx === 0) {
+    // 玩家抽牌后
+    if (canPlayDrawn) {
+      S.selectedIdx = p.hand.length - 1;
+      S.humanCanAct = true;
+      setMsg('抽到的牌可以打出！点击它或结束回合');
+      renderHand();
+      showPassButton(true);
+      return;
+    }
+    advanceTurn();
+    renderAll();
+    beginTurn();
+    return;
+  }
+  // AI 抽牌后
+  if (canPlayDrawn) {
+    setStatus(idx, '打出抽到的牌');
+    const dec = UNOCore.aiDecide(p.hand, g.activeColor, g.activeValue);
+    S.flowTimer = setTimeout(function () {
+      doPlay(idx, dec.index, dec.color);
+    }, S.settings.aiSpeed * 2500); // 与 AI 回合停顿一致
+  } else {
+    advanceTurn();
+    renderAll();
+    beginTurn();
+  }
+}
+
+/* ================================================================
+ * 机会活动 / 决斗 / 计分 / 捉 UNO
+ * ================================================================ */
+S.pendingCatch = null;   // 漏喊 UNO 的 AI
+S.missedUno = false;     // 玩家漏喊 UNO
+S._colorCb = null;
+S._peachSel = [];
+S._peachMax = 0;
+
+function colorHex(c) {
+  if (c.type === 'wild') return 'linear-gradient(135deg,#ffc93c,#d9a441)';
+  if (c.type === 'wild4') return 'linear-gradient(135deg,#2c3e50,#0f2318)';
+  return { red: '#e23b2e', green: '#2ea44f', blue: '#2f7de1', yellow: '#ffc93c' }[c.color] || '#888';
+}
+function miniCard(c) {
+  const fg = c.color === 'yellow' ? '#22170e' : '#fff';
+  return '<div style="width:64px;height:96px;border-radius:9px;background:' + colorHex(c) +
+    ';display:flex;align-items:center;justify-content:center;font-weight:400;font-family:var(--font-display);font-size:26px;color:' + fg + ';border:2px solid var(--ink);box-shadow:2px 3px 0 var(--ink),0 4px 12px rgba(0,0,0,.4)">' +
+    faceHTML(c) + '</div>';
+}
+
+/* ---------- 机会活动入口 ---------- */
+function runChanceFlow(idx, activity) {
+  const g = S.g;
+  clearAI();
+  sfx('chance');
+  renderAll();
+  if (activity === 'ponzi') {
+    g.ponzi = { count: 0 };
+    setMsg('💸 庞氏骗局开始，继续出牌！');
+    openModal(modalTitle('💸 庞氏骗局') + modalSub('接下来继续正常出牌。第一个被迫抽牌的玩家将抽取「期间所有出牌与抽牌数量总和」张牌，然后骗局结束。'));
+    setTimeout(function () { closeModal(); beginTurn(); }, 3000);
+    return;
+  }
+  if (activity === 'lightning') { doLightning(idx); return; }
+  if (activity === 'iron') {
+    const r = UNOCore.applyIron(g, idx);
+    setStatus(r.partner, '⛓ 铁索');
+    openModal(modalTitle('⛓ 铁索连环') + modalSub('你与 <b>' + g.players[r.partner].name + '</b> 形成风险共同体：任一方被罚抽牌时另一方同受，遭受一次后解除。'));
+    setTimeout(function () { closeModal(); beginTurn(); }, 3000);
+    return;
+  }
+  if (activity === 'peach') { doPeach(idx); return; }
+  if (activity === 'harvest') { doHarvest(idx); return; }
+  if (activity === 'duel') { doDuelPick(idx); return; }
+  if (activity === 'poker' || activity === 'fire') { doShowdownPick(idx, activity); return; }
+}
+
+function modalInfoAndContinue(title, body, delay) {
+  openModal(modalTitle(title) + modalSub(body));
+  setTimeout(function () { closeModal(); beginTurn(); }, delay || 3000);
+}
+
+/* 闪电 */
+function doLightning(idx) {
+  const g = S.g;
+  const res = UNOCore.applyLightning(g, idx);
+  openModal(modalTitle('⚡ 闪电') +
+    '<div class="dice-box"><div class="die">' + res.d1 + '</div><div class="die">' + res.d2 + '</div></div>' +
+    modalSub('<b>' + g.players[res.target].name + '</b> 被雷劈中，抽 <b>' + res.count + '</b> 张牌！'));
+  setTimeout(function () {
+    closeModal(); renderAll(); showHeadFx(res.target, 'draw', { count: res.count });
+    if (maybeHandLimitEnd()) return;
+    beginTurn();
+  }, 3200);
+}
+
+/* 德州扑克 / 火攻 —— 选对手 */
+function doShowdownPick(idx, type) {
+  const g = S.g;
+  const others = [];
+  for (let i = 0; i < g.numPlayers; i++) if (i !== idx) others.push(i);
+  if (g.players[idx].isAI) {
+    const target = others[Math.floor(Math.random() * others.length)];
+    const ci = UNOCore.pickHighestCard(g.players[idx].hand);
+    setStatus(idx, '亮牌中…');
+    setTimeout(function () { revealCard(idx, target, ci, type); }, 1600);
+    return;
+  }
+  let html = modalTitle(type === 'poker' ? '🃏 德州扑克' : '🔥 火攻');
+  html += modalSub(type === 'poker'
+    ? '选择一个对手，双方各亮一张牌比较数字：点数小者抽「较大数字」张，平局无事发生。'
+    : '选择一个对手比颜色：颜色相同你抽 4 张，颜色不同对手抽 4 张。');
+  html += '<div class="modal-row">';
+  others.forEach(function (i) {
+    html += '<div class="modal-tile" onclick="UNO.chooseTarget(' + idx + ',' + i + ',\'' + type + '\')">' + g.players[i].name + '</div>';
+  });
+  html += '</div>';
+  openModal(html);
+}
+function chooseTarget(aIdx, bIdx, type) {
+  const g = S.g;
+  if (g.players[aIdx].isAI) { /* AI 已选 */ return; }
+  let html = modalTitle(type === 'poker' ? '🃏 亮出你的牌' : '🔥 亮出你的牌');
+  html += modalSub('选择你要亮出的牌');
+  html += '<div class="modal-row">';
+  g.players[aIdx].hand.forEach(function (c, i) {
+    html += '<div class="modal-card" style="background:' + colorHex(c) + '" onclick="UNO.revealCard(' + aIdx + ',' + bIdx + ',' + i + ',\'' + type + '\')">' + faceHTML(c) + '</div>';
+  });
+  html += '</div>';
+  openModal(html);
+}
+function revealCard(aIdx, bIdx, aCardIdx, type) {
+  const g = S.g;
+  if (!g.players[bIdx].isAI) {
+    let html = modalTitle('对方亮牌');
+    html += modalSub(g.players[bIdx].name + ' 选择要亮的牌');
+    html += '<div class="modal-row">';
+    g.players[bIdx].hand.forEach(function (c, i) {
+      html += '<div class="modal-card" style="background:' + colorHex(c) + '" onclick="UNO.finishShowdown(' + aIdx + ',' + bIdx + ',' + aCardIdx + ',' + i + ',\'' + type + '\')">' + faceHTML(c) + '</div>';
+    });
+    html += '</div>';
+    openModal(html);
+    return;
+  }
+  const bi = UNOCore.pickHighestCard(g.players[bIdx].hand);
+  finishShowdown(aIdx, bIdx, aCardIdx, bi, type);
+}
+function finishShowdown(aIdx, bIdx, aCardIdx, bCardIdx, type) {
+  const g = S.g;
+  const aCard = g.players[aIdx].hand[aCardIdx];
+  const bCard = g.players[bIdx].hand[bCardIdx];
+  const res = UNOCore.applyShowdown(g, type, aIdx, aCard, bIdx, bCard);
+  let html = modalTitle(type === 'poker' ? '🃏 德州扑克' : '🔥 火攻');
+  html += '<div class="modal-row" style="align-items:center;">' + miniCard(aCard) +
+    '<span style="align-self:center;font-size:18px;font-weight:900;color:var(--gold);">VS</span>' +
+    miniCard(bCard) + '</div>';
+  html += '<div class="result-line"><b>' + res.detail + '</b></div>';
+  openModal(html);
+  setTimeout(function () {
+    closeModal(); renderAll();
+    if (res.drawIdx != null) showHeadFx(res.drawIdx, 'draw', { count: res.count });
+    if (maybeHandLimitEnd()) return;
+    beginTurn();
+  }, 3200);
+}
+
+/* 决斗 */
+function doDuelPick(idx) {
+  const g = S.g;
+  if (g.players[idx].isAI) {
+    const others = [];
+    for (let i = 0; i < g.numPlayers; i++) if (i !== idx) others.push(i);
+    const target = others[Math.floor(Math.random() * others.length)];
+    const color = UNOCore.chooseColorForAI(g.players[idx].hand);
+    UNOCore.applyDuelStart(g, idx, color, target);
+    setMsg('⚔ ' + g.players[idx].name + ' 发起决斗！起手：' + UNOCore.COLOR_NAME[color] + '色');
+    setTimeout(beginTurn, 2000);
+    return;
+  }
+  openColorPicker(function (color) {
+    let html = modalTitle('⚔ 决斗');
+    html += modalSub('选择你的对手（' + UNOCore.COLOR_NAME[color] + '色起手，对方先出）');
+    html += '<div class="modal-row">';
+    for (let i = 0; i < g.numPlayers; i++) {
+      if (i !== idx) html += '<div class="modal-tile" onclick="UNO.confirmDuel(' + idx + ',' + i + ',\'' + color + '\')">' + g.players[i].name + '</div>';
+    }
+    html += '</div>';
+    openModal(html);
+  }, '选择决斗颜色');
+}
+function confirmDuel(aIdx, bIdx, color) {
+  const g = S.g;
+  UNOCore.applyDuelStart(g, aIdx, color, bIdx);
+  setMsg('⚔ 决斗开始！' + g.players[bIdx].name + ' 先出（' + UNOCore.COLOR_NAME[color] + '色）');
+  setTimeout(beginTurn, 1200);
+}
+function finishDuelDraw(idx) {
+  const g = S.g;
+  const info = UNOCore.duelDraw(g, idx);
+  renderAll();
+  if (info.X > 0) showHeadFx(idx, 'draw', { count: info.X });
+  toast('⚔ 决斗结束：' + g.players[idx].name + ' 无法出牌，抽 ' + info.X + ' 张');
+  sfx('draw');
+  if (maybeHandLimitEnd()) return;
+  setTimeout(beginTurn, 1400);
+}
+
+/* 桃源结义 */
+function doPeach(idx) {
+  const order = [];
+  for (let k = 0; k < S.g.numPlayers; k++) order.push((idx + k) % S.g.numPlayers);
+  peachStep(order, 0);
+}
+function peachStep(order, step) {
+  const g = S.g;
+  if (step >= order.length) { renderAll(); beginTurn(); return; }
+  const pIdx = order[step];
+  const p = g.players[pIdx];
+  const maxC = Math.floor(p.hand.length / 2);
+  if (maxC <= 0) { setTimeout(function () { peachStep(order, step + 1); }, 400); return; }
+  if (p.isAI) {
+    const picks = UNOCore.pickLowestCards(p.hand, maxC);
+    UNOCore.discardCards(g, pIdx, picks);
+    setMsg('🍑 ' + p.name + ' 丢弃 ' + picks.length + ' 张');
+    renderSeats();
+    setTimeout(function () { peachStep(order, step + 1); }, 1200);
+    return;
+  }
+  S._peachSel = [];
+  S._peachMax = maxC;
+  let html = modalTitle('🍑 桃源结义');
+  html += modalSub('选择要丢弃的牌（最多 ' + maxC + ' 张，点牌选中/取消，选满后确认）');
+  html += '<div class="modal-row" style="gap:6px;">';
+  p.hand.forEach(function (c, i) {
+    html += '<div class="modal-card" data-i="' + i + '" style="background:' + colorHex(c) + '" onclick="UNO.togglePeach(this,' + i + ')">' + faceHTML(c) + '</div>';
+  });
+  html += '</div><div class="modal-actions"><button class="btn primary" onclick="UNO.confirmPeach(' + pIdx + ')">确认丢弃（0/0）</button></div>';
+  openModal(html);
+}
+function togglePeach(el, i) {
+  const arr = S._peachSel;
+  const pos = arr.indexOf(i);
+  if (pos >= 0) { arr.splice(pos, 1); el.classList.remove('selected'); }
+  else {
+    if (arr.length >= S._peachMax) { toast('最多丢弃 ' + S._peachMax + ' 张'); return; }
+    arr.push(i); el.classList.add('selected');
+  }
+  const btn = byId('modalContent').querySelector('.primary');
+  if (btn) btn.textContent = '确认丢弃（' + arr.length + '/' + S._peachMax + '）';
+}
+function confirmPeach(pIdx) {
+  const g = S.g;
+  const removed = UNOCore.discardCards(g, pIdx, S._peachSel);
+  S._peachSel = [];
+  closeModal();
+  setMsg('🍑 你丢弃 ' + removed.length + ' 张');
+  renderSeats();
+  const order = [];
+  for (let k = 0; k < g.numPlayers; k++) order.push((0 + k) % g.numPlayers);
+  peachStep(order, 0);
+}
+
+/* 五谷丰登 */
+function doHarvest(idx) {
+  const g = S.g;
+  const color = g.activeColor;
+  if (!color) { beginTurn(); return; }
+  const order = [];
+  for (let k = 0; k < g.numPlayers; k++) order.push((idx + k) % g.numPlayers);
+  let total = 0;
+  order.forEach(function (pi) {
+    const removed = UNOCore.discardColorCards(g, pi, color);
+    total += removed.length;
+  });
+  renderAll();
+  setMsg('🌾 五谷丰登：所有人丢出 ' + UNOCore.COLOR_NAME[color] + ' 色牌，共 ' + total + ' 张');
+  setTimeout(beginTurn, 2600);
+}
+
+/* ---------- 捉 UNO ---------- */
+function renderCatchUno() {
+  const btn = byId('btnCatchUno');
+  const g = S.g;
+  if (!g) { btn.classList.add('hidden'); return; }
+  if (MODE === 'multi') {
+    const targets = (g.unoMissing || []).filter(v => v !== 0); // 只能捉别人
+    if (targets.length) {
+      btn.classList.remove('hidden');
+      btn.textContent = '🔔 捉 ' + targets.map(v => g.players[v].name).join('、') + ' 的 UNO!';
+      btn.dataset.targets = targets.join(',');
+    } else {
+      btn.classList.add('hidden');
+    }
+    return;
+  }
+  if (S.pendingCatch != null && g.players[S.pendingCatch]) {
+    btn.classList.remove('hidden');
+    btn.textContent = '🔔 捉 ' + g.players[S.pendingCatch].name + ' 的 UNO!';
+    btn.dataset.targets = String(S.pendingCatch);
+  } else {
+    btn.classList.add('hidden');
+  }
+}
+function catchUnoNow() {
+  const g = S.g;
+  if (MODE === 'multi') {
+    const btn = byId('btnCatchUno');
+    const ts = (btn.dataset.targets || '').split(',').filter(Boolean);
+    if (!ts.length) return;
+    sendMsg({ type: 'action', action: 'catchUno', seat: parseInt(ts[0], 10) });
+    return;
+  }
+  if (S.pendingCatch == null) return;
+  const ai = S.pendingCatch;
+  g.players[ai].calledUno = true;
+  g.players[ai].uno = false;
+  UNOCore.draw(g, ai, 2);
+  S.pendingCatch = null;
+  renderAll();
+  showHeadFx(ai, 'draw', { count: 2 });
+  setMsg('🔔 捉到 ' + g.players[ai].name + ' 漏喊 UNO，罚抽 2 张');
+  sfx('error');
+  if (maybeHandLimitEnd()) return;
+}
+
+/* ---------- 回合结束 / 计分 / 游戏结束 ---------- */
+function maybeHandLimitEnd() {
+  const winnerIdx = UNOCore.handLimitWinner(S.g);
+  if (winnerIdx == null) return false;
+  roundEndFlow(winnerIdx, 'hand-limit');
+  return true;
+}
+function roundEndFlow(winnerIdx, reason) {
+  const g = S.g;
+  const res = UNOCore.roundEnd(g, winnerIdx);
+  sfx(winnerIdx === 0 ? 'win' : 'lose');
+  renderAll();
+  const gOver = UNOCore.isGameOver(g);
+  let html = modalTitle('🏁 第 ' + g.round + ' 轮结束');
+  if (reason === 'hand-limit') {
+    html += modalSub('🃏 手牌达到 30 张，本轮按手牌数、再按手牌点数结算。<br>🏆 <b>' + g.players[winnerIdx].name + '</b> 获胜（' + g.players[winnerIdx].hand.length + ' 张，' + UNOCore.scoreHand(g.players[winnerIdx].hand) + ' 点），获得 <b>' + res.pts + '</b> 分！');
+  } else {
+    html += modalSub('🏆 <b>' + g.players[winnerIdx].name + '</b> 打光手牌，赢得 <b>' + res.pts + '</b> 分！');
+  }
+  if (res.breakdown.length) {
+    html += '<div class="result-line">' + res.breakdown.map(function (b) { return b.name + '：' + b.v + ' 分'; }).join(' · ') + '</div>';
+  }
+  html += '<div class="result-line" style="margin-top:10px;font-size:15px;">总比分　' +
+    g.players.map(function (p) { return p.name + '：<b>' + p.score + '</b>'; }).join('　·　') + '</div>';
+  if (gOver) {
+    const gw = g.players.find(p => p.score >= 500);
+    html += '<div class="big-emoji">🏆</div>';
+    html += '<div class="result-line" style="font-size:17px;"><b>' + gw.name + '</b> 率先达到 500 分，赢得整场游戏！</div>';
+    html += '<div class="modal-actions">' +
+      '<button class="btn primary" onclick="UNO.newGame()">再来一局</button>' +
+      '<button class="btn" onclick="UNO.backToStart()">返回主菜单</button></div>';
+  } else {
+    html += '<div class="modal-actions"><button class="btn primary" onclick="UNO.nextRound()">下一轮 ▶</button></div>';
+  }
+  openModal(html);
+}
+function nextRound() {
+  const g = S.g;
+  closeModal();
+  g.round++;
+  UNOCore.deal(g);
+  S.pendingCatch = null;
+  S.missedUno = false;
+  beginTurn();
+}
+function newGame() {
+  closeModal();
+  startGame(S.g.numPlayers);
+}
+function backToStart() {
+  closeModal();
+  clearAI();
+  byId('gameScreen').classList.add('hidden');
+  byId('startScreen').classList.remove('hidden');
+}
+
+/* ---------- 分数面板 ---------- */
+function showScores() {
+  const g = S.g;
+  const sorted = g.players.slice().sort(function (a, b) { return b.score - a.score; });
+  let html = modalTitle('🏆 比分');
+  html += '<div id="scorePanel"><table><tr><th>玩家</th><th>本轮手牌</th><th>总分</th></tr>';
+  sorted.forEach(function (p, i) {
+    const h = handSizeOf(p);
+    html += '<tr class="' + (i === 0 ? 'score-leader' : '') + '"><td>' + p.name + '</td><td>' +
+      (h ? h + ' 张' : '已打完') + '</td><td>' + p.score + '</td></tr>';
+  });
+  html += '</table></div>';
+  html += '<div class="modal-actions"><button class="btn primary" onclick="UNO.closeModal()">继续游戏</button></div>';
+  openModal(html);
+}
+
+/* ---------- 全局回调对象 ---------- */
+window.UNO = {
+  pickColor: function (c) {
+    closeModal();
+    if (S._colorCb) { const cb = S._colorCb; S._colorCb = null; cb(c); }
+  },
+  chooseTarget: chooseTarget,
+  revealCard: revealCard,
+  finishShowdown: finishShowdown,
+  confirmDuel: confirmDuel,
+  togglePeach: togglePeach,
+  confirmPeach: confirmPeach,
+  closeModal: closeModal,
+  nextRound: nextRound,
+  newGame: newGame,
+  backToStart: backToStart,
+  /* 多人联机回调 */
+  mpChoiceTarget: function (v) { closeModal(); sendMsg({ type: 'choice', choice: { kind: 'target', seat: v } }); },
+  mpChoiceDuelTarget: function (v) { closeModal(); sendMsg({ type: 'choice', choice: { kind: 'duelTarget', seat: v } }); },
+  mpChoiceReveal: function (i) { closeModal(); sendMsg({ type: 'choice', choice: { kind: 'reveal', cardIdx: i } }); },
+  mpTogglePeach: function (el, i) {
+    const arr = S._peachSel;
+    const pos = arr.indexOf(i);
+    if (pos >= 0) { arr.splice(pos, 1); el.classList.remove('selected'); }
+    else {
+      if (arr.length >= S._peachMax) { toast('最多丢弃 ' + S._peachMax + ' 张'); return; }
+      arr.push(i); el.classList.add('selected');
+    }
+    const btn = byId('modalContent').querySelector('.primary');
+    if (btn) btn.textContent = '确认丢弃（' + arr.length + '/' + S._peachMax + '）';
+  },
+  mpConfirmPeach: function () {
+    closeModal();
+    sendMsg({ type: 'choice', choice: { kind: 'peach', indexes: S._peachSel.slice() } });
+    S._peachSel = [];
+  },
+  mpToLobby: function () { closeModal(); },
+};
+
+/* ================================================================
+ * 多人联机客户端（瘦客户端：渲染快照 + 发指令 + 播放效果）
+ * ================================================================ */
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function sendMsg(obj) {
+  if (WS && WS.readyState === WebSocket.OPEN) WS.send(JSON.stringify(obj));
+  else { toast('未连接服务器'); sfx('error'); }
+}
+function mpWsUrl() {
+  // 优先取 URL 上的 ?ws=ws://host:port 覆盖（方便自定义服务器）
+  const m = /[?&]ws=([^&]+)/.exec(location.search);
+  if (m) return decodeURIComponent(m[1]);
+  if (location.protocol === 'https:') return 'wss://' + location.host;
+  if (location.protocol === 'http:') return 'ws://' + location.host;
+  // file:// 协议（直接双击 index.html 打开）：location.host 为空，回退到本机默认端口
+  return 'ws://localhost:3000';
+}
+function connectMP(create, maxPlayers) {
+  const name = (byId('mpName').value.trim() || '玩家').slice(0, 12);
+  const code = byId('mpRoomCode').value.trim();
+  const wsUrl = mpWsUrl();
+  let opened = false;
+  try { WS = new WebSocket(wsUrl); } catch (e) {
+    byId('mpStatus').textContent = '无法连接服务器：' + wsUrl + ' 无效';
+    sfx('error');
+    return;
+  }
+  byId('mpStatus').textContent = '连接中…';
+  WS.onopen = function () {
+    opened = true;
+    if (create) sendMsg({ type: 'createRoom', name, maxPlayers });
+    else sendMsg({ type: 'joinRoom', roomCode: code, name });
+  };
+  WS.onmessage = function (e) {
+    let msg;
+    try { msg = JSON.parse(e.data); } catch (err) { return; }
+    onWsMessage(msg);
+  };
+  WS.onerror = function () {
+    // 连接失败（如服务器未启动）。onclose 会随后触发，在那里统一提示。
+  };
+  WS.onclose = function () {
+    WS = null;
+    byId('mpLobby').classList.add('hidden');
+    const el = byId('mpStatus');
+    if (!opened) {
+      el.textContent = '无法连接服务器（' + wsUrl + '），请先在本目录运行 node server.js';
+    } else {
+      el.textContent = '连接已断开';
+    }
+    MODE = 'solo';
+    byId('btnStart').disabled = false;
+  };
+}
+function onWsMessage(msg) {
+  switch (msg.type) {
+    case 'joined':
+      mySeat = msg.seat; host = !!msg.host;
+      break;
+    case 'lobby':
+      renderLobby(msg.lobby);
+      break;
+    case 'state':
+      applyMultiState(msg);
+      break;
+    case 'effects':
+      playEffects(msg.effects);
+      break;
+    case 'prompt':
+      onPrompt(msg.prompt);
+      break;
+    case 'message':
+      if (msg.text) setMsg(msg.text);
+      break;
+    case 'error':
+      toast(msg.message || '错误');
+      sfx('error');
+      break;
+  }
+}
+function renderLobby(l) {
+  lobby = l;
+  MODE = 'multi';
+  closeModal();
+  byId('startScreen').classList.remove('hidden');
+  byId('gameScreen').classList.add('hidden');
+  byId('btnStart').disabled = true;
+  byId('mpLobby').classList.remove('hidden');
+  byId('mpRoomTitle').textContent = '房间 ' + l.roomCode + '（' + (l.status === 'playing' ? '游戏中' : '等待中') + ' · ' + l.maxPlayers + ' 人桌）';
+  const seatsEl = byId('mpSeats');
+  seatsEl.innerHTML = '';
+  (l.seats || []).forEach(function (s) {
+    if (!s) return;
+    const div = document.createElement('div');
+    div.className = 'mp-seat' + (s.seat === mySeat ? ' you' : '');
+    const state = s.connected ? (s.ready ? '✅ 就绪' : '⏳ 未就绪') : (s.isAI ? '🤖 AI' : '💤 离线');
+    div.innerHTML = '<span class="mp-seat-num">' + (s.seat + 1) + ' 号</span>' +
+      '<span class="mp-seat-name">' + escapeHtml(s.name) + '</span>' +
+      '<span class="mp-seat-state">' + state + '</span>';
+    seatsEl.appendChild(div);
+  });
+  byId('btnMpStart').classList.toggle('hidden', !host);
+  if (mySeat >= 0 && l.seats && l.seats[mySeat]) {
+    byId('btnMpReady').textContent = l.seats[mySeat].ready ? '✅ 已就绪' : '📣 就绪';
+  }
+  byId('mpStatus').textContent = '已进入房间';
+}
+function applyMultiState(msg) {
+  MODE = 'multi';
+  S.g = msg.snapshot;
+  mySeat = msg.yourSeat;
+  S.selectedIdx = -1;
+  S.humanCanAct = !!msg.canAct;
+  mpPlayDrawn = !!msg.playDrawn;
+  showPassButton(mpPlayDrawn);
+  byId('startScreen').classList.add('hidden');
+  byId('gameScreen').classList.remove('hidden');
+  if (S._roundModal && S._roundEndRound != null && msg.snapshot.round > S._roundEndRound) {
+    closeModal(); S._roundModal = false;
+  }
+  renderAll();
+  // AI 回合显示"思考中…"
+  const curP = S.g.players[S.g.current];
+  if (curP.isAI && !S._roundModal && !S.g.duel) setStatus(S.g.current, '思考中…');
+  if (msg.canAct) {
+    const inStack = S.g.drawStack && S.g.current === S.g.drawStack.target;
+    if (inStack) {
+      pulseDraw(true);
+      setMsg('接龙中！可出 +2/+4 接龙，或抓 ' + S.g.drawStack.count + ' 张');
+    } else {
+      pulseDraw(!!msg.mustDraw);
+      if (msg.mustDraw) setMsg('没有可出的牌，点击牌堆抽一张');
+    }
+  } else {
+    pulseDraw(false);
+  }
+}
+function showInfoModal(html, dur) {
+  S._infoModal = true;
+  openModal(html);
+  clearTimeout(S._infoTimer);
+  S._infoTimer = setTimeout(function () { closeModal(); S._infoModal = false; }, dur || 2500);
+}
+function playerName(v) { return S.g && S.g.players[v] ? S.g.players[v].name : '?'; }
+function playEffects(effects) {
+  effects.forEach(function (ef) {
+    switch (ef.type) {
+      case 'deal': sfx('deal'); break;
+      case 'play': {
+        const src = ef.seat === 0 ? byId('hand') : seatEl(ef.seat);
+        flyTo(src, discardEl(), cardHTML(ef.card)).then(function () { sfx('play'); });
+        break;
+      }
+      case 'draw': {
+        const dst = ef.seat === 0 ? byId('hand') : seatEl(ef.seat);
+        flyTo(byId('drawPile'), dst, cardBackHTML(), 420);
+        if (ef.count) showHeadFx(ef.seat, 'draw', { count: ef.count });
+        sfx('draw');
+        break;
+      }
+      case 'skip': showHeadFx(ef.seat, 'skip'); setStatus(ef.seat, '被跳过'); break;
+      case 'reverse': toast('方向反转 ↺'); break;
+      case 'chanceStart': sfx('chance'); break;
+      case 'lightning': {
+        const target = playerName(ef.target);
+        showInfoModal(modalTitle('⚡ 闪电') +
+          '<div class="dice-box"><div class="die">' + ef.d1 + '</div><div class="die">' + ef.d2 + '</div></div>' +
+          modalSub('<b>' + target + '</b> 被雷劈中，抽 <b>' + ef.count + '</b> 张牌！'), 2400);
+        showHeadFx(ef.target, 'draw', { count: ef.count });
+        sfx('draw');
+        break;
+      }
+      case 'showdown': {
+        showInfoModal(modalTitle(ef.type === 'poker' ? '🃏 德州扑克' : '🔥 火攻') +
+          '<div class="modal-row" style="align-items:center;">' + miniCard(ef.aCard) +
+          '<span style="align-self:center;font-size:18px;font-weight:900;color:var(--gold);">VS</span>' +
+          miniCard(ef.bCard) + '</div>' +
+          '<div class="result-line"><b>' + ef.detail + '</b></div>', 2800);
+        if (ef.drawIdx != null) sfx('draw');
+        break;
+      }
+      case 'duelStart': setMsg('⚔ 决斗开始！'); break;
+      case 'duelEnd': toast('⚔ 决斗结束，' + playerName(ef.seat) + ' 抽 ' + ef.X + ' 张'); break;
+      case 'ironFormed':
+        setStatus(ef.a, '⛓ 铁索'); setStatus(ef.b, '⛓ 铁索');
+        toast('⛓ 铁索连环！');
+        break;
+      case 'chainShared':
+        toast('⛓ 铁索连环！' + playerName(ef.partner) + ' 同受 ' + ef.count + ' 张');
+        showHeadFx(ef.partner, 'draw', { count: ef.count });
+        break;
+      case 'unlucky13':
+        toast('☠ 不幸 13！额外抽 13 张');
+        showHeadFx(ef.seat, 'draw', { count: 13 });
+        break;
+      case 'ponziStart': setMsg('💸 庞氏骗局开始，继续出牌！'); break;
+      case 'ponziEnded':
+        toast('💸 庞氏骗局爆发！' + playerName(ef.seat) + ' 抽 ' + ef.X + ' 张');
+        showHeadFx(ef.seat, 'draw', { count: ef.X });
+        break;
+      case 'harvest': setMsg('🌾 五谷丰登：共丢出 ' + ef.total + ' 张'); break;
+      case 'peachDiscard': setMsg('🍑 ' + playerName(ef.seat) + ' 丢弃 ' + ef.count + ' 张'); break;
+      case 'unoCalled': setStatus(ef.seat, 'UNO!'); sfx('uno'); break;
+      case 'catchUno':
+        toast('🔔 捉到 ' + playerName(ef.seat) + ' 漏喊 UNO，罚抽 2 张');
+        showHeadFx(ef.seat, 'draw', { count: 2 });
+        sfx('error');
+        break;
+      case 'roundEnd': {
+        const g = S.g;
+        S._roundEndRound = g.round;   // 记录结算轮次，下一轮 state 到达时关闭
+        let html = modalTitle('🏁 第 ' + g.round + ' 轮结束');
+        if (ef.reason === 'hand-limit') {
+          html += modalSub('🃏 手牌达到 ' + (ef.handLimit || 30) + ' 张，本轮按手牌数、再按手牌点数结算。<br>🏆 <b>' + g.players[ef.winner].name + '</b> 获胜（' + ef.winnerHandCount + ' 张，' + ef.winnerHandPoints + ' 点），获得 <b>' + ef.pts + '</b> 分！');
+        } else {
+          html += modalSub('🏆 <b>' + g.players[ef.winner].name + '</b> 打光手牌，赢得 <b>' + ef.pts + '</b> 分！');
+        }
+        if (ef.breakdown.length) {
+          html += '<div class="result-line">' + ef.breakdown.map(function (b) { return b.name + '：' + b.v + ' 分'; }).join(' · ') + '</div>';
+        }
+        html += '<div class="result-line" style="margin-top:10px;font-size:15px;">总比分　' +
+          ef.scores.map(function (p) { return p.name + '：<b>' + p.score + '</b>'; }).join('　·　') + '</div>';
+        S._roundModal = true;
+        openModal(html);
+        break;
+      }
+      case 'gameOver': {
+        const g = S.g;
+        const name = g.players[ef.winner] ? g.players[ef.winner].name : '';
+        const html = modalTitle('🏆 游戏结束') +
+          '<div class="big-emoji">🏆</div>' +
+          '<div class="result-line" style="font-size:17px;"><b>' + name + '</b> 率先达到 500 分，赢得整场游戏！</div>' +
+          '<div class="modal-actions"><button class="btn primary" onclick="UNO.mpToLobby()">返回大厅</button></div>';
+        openModal(html);
+        break;
+      }
+    }
+  });
+}
+function onPrompt(p) {
+  S._infoModal = false;
+  S.humanCanAct = false;   // 提示期间禁止其他操作（模态框也会挡住点击）
+  switch (p.kind) {
+    case 'color':
+      openColorPicker(function (color) { sendMsg({ type: 'choice', choice: { kind: 'color', color: color } }); }, '选择颜色');
+      break;
+    case 'duelColor':
+      openColorPicker(function (color) { sendMsg({ type: 'choice', choice: { kind: 'duelColor', color: color } }); }, '选择决斗颜色');
+      break;
+    case 'target': {
+      let html = modalTitle(p.type === 'poker' ? '🃏 德州扑克' : '🔥 火攻');
+      html += modalSub(p.type === 'poker'
+        ? '选择一个对手，双方各亮一张牌比较数字：点数小者抽「较大数字」张，平局无事发生。'
+        : '选择一个对手比颜色：颜色相同你抽 4 张，颜色不同对手抽 4 张。');
+      html += '<div class="modal-row">';
+      (p.seats || []).forEach(function (v) {
+        html += '<div class="modal-tile" onclick="UNO.mpChoiceTarget(' + v + ')">' + playerName(v) + '</div>';
+      });
+      html += '</div>';
+      openModal(html);
+      break;
+    }
+    case 'duelTarget': {
+      let html = modalTitle('⚔ 决斗');
+      html += modalSub('选择你的对手（' + UNOCore.COLOR_NAME[p.color] + '色起手，对方先出）');
+      html += '<div class="modal-row">';
+      (p.seats || []).forEach(function (v) {
+        html += '<div class="modal-tile" onclick="UNO.mpChoiceDuelTarget(' + v + ')">' + playerName(v) + '</div>';
+      });
+      html += '</div>';
+      openModal(html);
+      break;
+    }
+    case 'reveal': {
+      let html = modalTitle('亮出你的牌');
+      html += modalSub('选择你要亮出的牌');
+      html += '<div class="modal-row">';
+      (p.hand || []).forEach(function (c, i) {
+        html += '<div class="modal-card" style="background:' + colorHex(c) + '" onclick="UNO.mpChoiceReveal(' + i + ')">' + faceHTML(c) + '</div>';
+      });
+      html += '</div>';
+      openModal(html);
+      break;
+    }
+    case 'peach': {
+      S._peachSel = [];
+      S._peachMax = p.maxC;
+      let html = modalTitle('🍑 桃源结义');
+      html += modalSub('选择要丢弃的牌（最多 ' + p.maxC + ' 张，点牌选中/取消，选满后确认）');
+      html += '<div class="modal-row" style="gap:6px;">';
+      (p.hand || []).forEach(function (c, i) {
+        html += '<div class="modal-card" data-i="' + i + '" style="background:' + colorHex(c) + '" onclick="UNO.mpTogglePeach(this,' + i + ')">' + faceHTML(c) + '</div>';
+      });
+      html += '</div><div class="modal-actions"><button class="btn primary" onclick="UNO.mpConfirmPeach()">确认丢弃（0/' + p.maxC + '）</button></div>';
+      openModal(html);
+      break;
+    }
+  }
+}
+function initMP() {
+  byId('btnCreateRoom').addEventListener('click', function () {
+    const maxP = parseInt(byId('mpPlayers').value, 10) || 4;
+    connectMP(true, maxP);
+  });
+  byId('btnJoinRoom').addEventListener('click', function () {
+    if (!byId('mpRoomCode').value.trim()) { toast('请输入 4 位房间码'); return; }
+    connectMP(false);
+  });
+  byId('btnMpStart').addEventListener('click', function () {
+    sendMsg({
+      type: 'startGame',
+      settings: {
+        aiFill: byId('mpAiFill').checked,
+        aiSpeed: parseFloat(byId('aiSpeed').value) || 1.2,
+      },
+    });
+  });
+  byId('btnMpReady').addEventListener('click', function () {
+    const cur = lobby && lobby.seats && lobby.seats[mySeat] ? !!lobby.seats[mySeat].ready : false;
+    sendMsg({ type: 'setReady', ready: !cur });
+  });
+  byId('btnMpLeave').addEventListener('click', function () {
+    sendMsg({ type: 'leaveRoom' });
+    if (WS) { WS.close(); }
+    WS = null;
+    byId('mpLobby').classList.add('hidden');
+    byId('mpStatus').textContent = '';
+    byId('btnStart').disabled = false;
+    MODE = 'solo';
+  });
+}
+
+/* ================================================================
+ * 人类玩家交互 + 初始化
+ * ================================================================ */
+function showPassButton(on) {
+  byId('btnPass').classList.toggle('hidden', !on);
+}
+
+function onHandClick(i, wrap) {
+  if (!S.humanCanAct) return;
+  const g = S.g;
+  if (g.duel && g.current !== 0) return;
+  const p = g.players[0];
+  const card = p.hand[i];
+  const inStack = g.drawStack && g.drawStack.target === 0;
+  const ok = inStack ? UNOCore.isDrawStackCard(card)
+    : g.duel ? UNOCore.duelPlayableIndexes(p.hand, g.activeColor, g.activeValue).includes(cardIdx)
+    : UNOCore.legalPlayable(card, p.hand, g.activeColor, g.activeValue);
+  if (!ok) {
+    shake(wrap);
+    sfx('error');
+    toast(inStack ? '接龙中只能打出 +2/+4' : (g.duel ? '决斗中不能打出 +2' : '这张牌不能打出'));
+    return;
+  }
+  if (MODE === 'multi') {
+    sendMsg({ type: 'action', action: 'play', cardIdx: i });
+    return;
+  }
+  S.selectedIdx = i;
+  renderHand();
+  if (card.type === 'wild' || card.type === 'wild4') {
+    openColorPicker(function (color) { doPlay(0, i, color); }, '选择颜色');
+  } else {
+    doPlay(0, i, null);
+  }
+}
+
+function onDrawClick() {
+  if (!S.humanCanAct) return;
+  const g = S.g;
+  if (g.duel && g.current !== 0) return;
+  if (MODE === 'multi') {
+    sendMsg({ type: 'action', action: 'draw' });
+    return;
+  }
+  // 接龙中：点击牌堆 = 抓累计张数并结束接龙
+  if (g.drawStack && g.drawStack.target === 0) {
+    drawStackFlow(0);
+    return;
+  }
+  if (S.drewThisTurn) return;
+  const p = g.players[0];
+  S.drewThisTurn = true;
+  const hasPlay = UNOCore.hasPlayable(p.hand, g.activeColor, g.activeValue);
+  doDraw(0, hasPlay);
+}
+
+/* ---------- 开始游戏 ---------- */
+function startGame(numPlayers) {
+  ensureAudio();
+  sfx('deal');
+  const g = UNOCore.newGame(numPlayers);
+  S.g = g;
+  UNOCore.deal(g);
+  S.pendingCatch = null;
+  S.missedUno = false;
+  S.drewThisTurn = false;
+  S.selectedIdx = -1;
+  byId('startScreen').classList.add('hidden');
+  byId('gameScreen').classList.remove('hidden');
+  beginTurn();
+}
+
+function init() {
+  S.settings = loadSettings();
+  applyTheme();
+  updateSoundBtns();
+  S.settings.aiSpeed = parseFloat(byId('aiSpeed').value) || 1.2;
+
+  byId('aiSpeed').addEventListener('input', function (e) {
+    S.settings.aiSpeed = parseFloat(e.target.value);
+    saveSettings();
+  });
+  byId('btnStart').addEventListener('click', function () {
+    startGame(parseInt(byId('playerCount').value, 10));
+  });
+  byId('btnTheme').addEventListener('click', toggleTheme);
+  byId('btnTheme2').addEventListener('click', toggleTheme);
+  byId('btnSound').addEventListener('click', toggleSound);
+  byId('btnSound2').addEventListener('click', toggleSound);
+  byId('btnScores').addEventListener('click', showScores);
+  byId('btnRestart').addEventListener('click', function () {
+    if (MODE === 'multi') {
+      if (window.confirm('离开当前对局？')) sendMsg({ type: 'leaveRoom' });
+      return;
+    }
+    if (S.g && window.confirm('重新开始本局？')) startGame(S.g.numPlayers);
+  });
+  byId('btnPass').addEventListener('click', function () {
+    if (MODE === 'multi') {
+      sendMsg({ type: 'action', action: 'pass' });
+      return;
+    }
+    S.humanCanAct = false;
+    S.drewThisTurn = false;
+    showPassButton(false);
+    advanceTurn();
+    renderAll();
+    beginTurn();
+  });
+  byId('btnCatchUno').addEventListener('click', catchUnoNow);
+  byId('drawArea').addEventListener('click', onDrawClick);
+  // 点击遮罩空白处可关闭无按钮的信息弹窗
+  byId('modalOverlay').addEventListener('click', function (e) {
+    if (e.target === this && !byId('modalContent').querySelector('.primary')) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      const c = byId('modalContent');
+      if (!c.querySelector('.primary')) closeModal();
+    }
+  });
+  initMP();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+if (document.readyState !== 'loading') init();
+
+/* 调试钩子：仅当 URL 带 ?debug 时暴露内部状态（便于自动化测试，正式游玩不受影响） */
+if (/[?&]debug/.test(location.search)) {
+  window.__S = S;
+  window.__ui = { beginTurn, doPlay, doDraw, drawStackFlow, renderAll, runChanceFlow, startGame, catchUnoNow, showHeadFx, syncHeadFx };
+  window.__origRandom = Math.random;
+}
+
+</script>
+</body>
+</html>

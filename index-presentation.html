@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNO 大作战 · 游戏介绍</title>
+<style>
+  :root{
+    --bg:#F5F0EA;            /* 奶油底 */
+    --ink:#1F1E1D;           /* 深墨主文字 */
+    --ink-2:#6B675F;         /* 次级暖灰 */
+    --line:#E6E1D8;          /* 细分隔线 */
+    --accent:#D97757;        /* Claude 陶土色 */
+    --accent-soft:#F0D9CE;   /* 陶土浅调 */
+    --card-red:#E63946; --card-green:#2A9D4B;
+    --card-blue:#2B6CB0; --card-yellow:#F4B41A;
+    --serif:Georgia,"Songti SC","STSong","SimSun",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+       line-height:1.6;-webkit-font-smoothing:antialiased}
+  /* 幻灯片容器 */
+  .deck{position:fixed;inset:0;overflow:hidden}
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;
+         justify-content:center;padding:8vh 9vw;overflow-y:auto}
+  .slide.active{display:flex}
+  /* 版面工具 */
+  .kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1,h2{font-family:var(--serif);font-weight:700;line-height:1.15;letter-spacing:-.01em}
+  .lead{color:var(--ink-2);font-size:clamp(16px,2vw,20px)}
+  /* 卡牌组件 */
+  .mini-card{width:66px;height:96px;border-radius:9px;display:flex;flex-direction:column;
+             align-items:center;justify-content:center;font-weight:800;font-size:30px;
+             box-shadow:0 2px 6px rgba(0,0,0,.18);border:2px solid rgba(0,0,0,.06);flex:none}
+  .mini-card small{font-size:12px;margin-top:-4px;opacity:.85}
+  .mini-card .cb{font-size:15px;margin-top:4px}
+  .mini-card.red{background:linear-gradient(150deg,#f4666f,var(--card-red));color:#fff}
+  .mini-card.green{background:linear-gradient(150deg,#38c76b,var(--card-green));color:#fff}
+  .mini-card.blue{background:linear-gradient(150deg,#4a8ad4,var(--card-blue));color:#fff}
+  .mini-card.yellow{background:linear-gradient(150deg,#ffd25e,var(--card-yellow));color:#5a4200}
+  .mini-card.wild{background:linear-gradient(150deg,#8a63d2,#6b3fb5);color:#fff}
+  .mini-card.wild4{background:linear-gradient(150deg,#3c3a44,#23212a);color:#fff}
+  /* 底部导航 */
+  .nav{position:fixed;bottom:0;left:0;right:0;height:56px;display:flex;align-items:center;
+       justify-content:space-between;padding:0 22px;color:var(--ink-2);
+       font-size:13px;border-top:1px solid var(--line);background:rgba(245,240,234,.92);
+       backdrop-filter:blur(6px);z-index:10}
+  .progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--line);z-index:10}
+  .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s ease}
+  @media print{
+    .nav,.progress{display:none}
+    .slide{position:relative;display:flex !important;page-break-after:always;
+           width:100vw;height:100vh;min-height:100vh}
+    html,body{height:auto}
+  }
+</style>
+</head>
+<body>
+<div class="progress"><i id="progBar"></i></div>
+<main class="deck" id="deck">
+
+<section class="slide active">
+  <div class="kicker">UNO CARD GAME · BROWSER EDITION</div>
+  <h1 style="font-size:clamp(44px,7vw,88px);margin:18px 0 10px">UNO 大作战</h1>
+  <p class="lead">纯浏览器里的 UNO——对战 3 个 AI，触发趣味特殊规则，一路冲向 500 分。</p>
+  <p style="margin-top:34px;color:var(--accent);font-weight:700">单文件 · 零依赖 · 开箱即玩</p>
+</section>
+
+<section class="slide">
+  <div class="kicker">AGENDA</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 34px">目录</h2>
+  <div style="display:flex;flex-direction:column;gap:16px;font-size:clamp(18px,2.4vw,24px)">
+    <div><span style="color:var(--accent);font-weight:800;margin-right:14px">01</span>玩法介绍 · 规则与卡牌</div>
+    <div><span style="color:var(--accent);font-weight:800;margin-right:14px">02</span>特色机制 · 机会牌与特殊规则</div>
+    <div><span style="color:var(--accent);font-weight:800;margin-right:14px">03</span>技术实现 · 单文件与 AI</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">OVERVIEW</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 8px">游戏概述</h2>
+  <p class="lead" style="margin-bottom:30px">一个完整、精致的单人 UNO，跑在浏览器里。</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+      <div style="font-size:26px">🌐</div><div style="font-weight:800;margin:8px 0 4px">纯浏览器运行</div>
+      <div style="color:var(--ink-2);font-size:14px">无需安装、无需服务器，打开即玩</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+      <div style="font-size:26px">🤖</div><div style="font-weight:800;margin:8px 0 4px">对战 3 个 AI</div>
+      <div style="color:var(--ink-2);font-size:14px">各有策略的对手，回合思考延迟自然</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+      <div style="font-size:26px">📄</div><div style="font-weight:800;margin:8px 0 4px">单文件实现</div>
+      <div style="color:var(--ink-2);font-size:14px">一个 index.html 承载全部逻辑与界面</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">HOW TO PLAY</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 8px">玩法核心</h2>
+  <p class="lead" style="margin-bottom:30px">标准 UNO 回合制，谁先出完手牌谁赢。</p>
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:720px">
+    <div style="display:flex;gap:16px;align-items:baseline"><span style="color:var(--accent);font-weight:800">①</span><span>开局每人发 <b>7 张牌</b>，翻开一张作为弃牌堆顶牌</span></div>
+    <div style="display:flex;gap:16px;align-items:baseline"><span style="color:var(--accent);font-weight:800">②</span><span>出牌须与顶牌<b>同颜色</b>或<b>同数字/图案</b></span></div>
+    <div style="display:flex;gap:16px;align-items:baseline"><span style="color:var(--accent);font-weight:800">③</span><span>无牌可出则<b>抽 1 张</b>；能打可立即打，否则回合结束</span></div>
+    <div style="display:flex;gap:16px;align-items:baseline"><span style="color:var(--accent);font-weight:800">④</span><span>按<b>顺/逆时针</b>轮转（反转牌可改变方向）</span></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">CARDS</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 8px">卡牌系统</h2>
+  <p class="lead" style="margin-bottom:28px">标准 108 张牌 · 4 种颜色</p>
+  <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+    <div style="text-align:center"><div class="mini-card red">7<small>7</small></div><div style="font-size:12px;color:var(--ink-2);margin-top:6px">数字牌</div></div>
+    <div style="text-align:center"><div class="mini-card green">⊘</div><div style="font-size:12px;color:var(--ink-2);margin-top:6px">跳过 Skip</div></div>
+    <div style="text-align:center"><div class="mini-card blue">↻</div><div style="font-size:12px;color:var(--ink-2);margin-top:6px">反转 Reverse</div></div>
+    <div style="text-align:center"><div class="mini-card yellow">+2</div><div style="font-size:12px;color:var(--ink-2);margin-top:6px">罚抽两张</div></div>
+    <div style="text-align:center"><div class="mini-card wild">★</div><div style="font-size:12px;color:var(--ink-2);margin-top:6px">万能牌</div></div>
+    <div style="text-align:center"><div class="mini-card wild4">+4</div><div style="font-size:12px;color:var(--ink-2);margin-top:6px">罚抽四张</div></div>
+  </div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:30px;color:var(--ink-2);font-size:14px">
+    <span><b style="color:var(--ink)">76</b> 数字牌（0–9）</span>
+    <span><b style="color:var(--ink)">24</b> 动作牌（Skip/Reverse/Draw2）</span>
+    <span><b style="color:var(--ink)">8</b> 野牌（Wild/Wild Draw4）</span>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">ACTION CARDS</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 26px">动作牌</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;max-width:820px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px">
+      <div class="mini-card green" style="width:52px;height:76px;font-size:22px">⊘</div>
+      <div style="font-weight:800;margin-top:12px">跳过</div><div style="color:var(--ink-2);font-size:14px">下家跳过回合</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px">
+      <div class="mini-card blue" style="width:52px;height:76px;font-size:22px">↻</div>
+      <div style="font-weight:800;margin-top:12px">反转</div><div style="color:var(--ink-2);font-size:14px">改变出牌方向</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px">
+      <div class="mini-card yellow" style="width:52px;height:76px;font-size:22px">+2</div>
+      <div style="font-weight:800;margin-top:12px">罚抽两张</div><div style="color:var(--ink-2);font-size:14px">下家抽 2 张并失去回合</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">WILD CARDS</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 26px">野牌</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;max-width:820px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px">
+      <div class="mini-card wild" style="width:52px;height:76px;font-size:22px">★</div>
+      <div style="font-weight:800;margin-top:12px">万能牌 Wild</div>
+      <div style="color:var(--ink-2);font-size:14px">出牌后选择下一局颜色</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px">
+      <div class="mini-card wild4" style="width:52px;height:76px;font-size:22px">+4</div>
+      <div style="font-weight:800;margin-top:12px">罚抽四张 Wild+4</div>
+      <div style="color:var(--ink-2);font-size:14px">变色 + 下家抽 4 张；仅在手中无匹配色时可出</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">CHANCE CARD</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 8px">特色机制 · 机会牌「0」</h2>
+  <p class="lead" style="margin-bottom:26px">打出数字「0」，随机触发 8 种趣味活动之一——把一局 UNO 变成小游戏派对。</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;font-size:14px">
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>庞氏骗局</b><div style="color:var(--ink-2)">继续出牌，首个抽牌者抽走累计数量</div></div>
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>德州扑克</b><div style="color:var(--ink-2)">点名拼点数，输家抽最大点数</div></div>
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>火攻</b><div style="color:var(--ink-2)">指定颜色对拼，接不上就抽牌</div></div>
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>闪电</b><div style="color:var(--ink-2)">掷两颗骰子决定抽牌人与数量</div></div>
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>决斗</b><div style="color:var(--ink-2)">定色开打，卡住者抽累计牌数</div></div>
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>铁索连环</b><div style="color:var(--ink-2)">与对家风险共同体，禁言/累加抽牌</div></div>
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>桃源结义</b><div style="color:var(--ink-2)">全员弃掉至多一半手牌一轮</div></div>
+    <div style="background:var(--accent-soft);border-radius:12px;padding:14px"><b>五谷丰登</b><div style="color:var(--ink-2)">全员丢弃与 0 同色的牌</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">SPECIAL RULES</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 26px">特色机制 · 更多规则</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:860px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+      <div style="font-weight:800;font-size:18px">😱 不幸 13</div>
+      <p style="color:var(--ink-2);font-size:14px;margin-top:8px">因抽牌手牌恰好达到 13 张时，触发厄运，需再抽 13 张。</p>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+      <div style="font-weight:800;font-size:18px">📣 UNO 捉牌</div>
+      <p style="color:var(--ink-2);font-size:14px;margin-top:8px">剩最后 1 张牌时必须喊「UNO！」；被 AI 抓到没喊，罚抽 2 张。</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">SCORING</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 26px">计分与胜利</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:860px;margin-bottom:26px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px"><b>数字牌</b><div style="color:var(--ink-2);font-size:14px">= 面值（0–9）</div></div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px"><b>动作牌</b><div style="color:var(--ink-2);font-size:14px">Skip / Reverse / Draw2 = 20 分</div></div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px"><b>野牌</b><div style="color:var(--ink-2);font-size:14px">Wild / Wild+4 = 50 分</div></div>
+  </div>
+  <p style="font-size:clamp(18px,2.6vw,26px)">🏆 打光手牌者赢得本局，累计分数<span style="color:var(--accent);font-weight:800">率先达到 500 分</span>者赢得整场游戏。</p>
+</section>
+
+<section class="slide">
+  <div class="kicker">TECH</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 8px">技术实现</h2>
+  <p class="lead" style="margin-bottom:26px">一个文件，装下完整游戏。</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;font-size:14px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px"><b>📄 单文件 · 零依赖</b><div style="color:var(--ink-2);margin-top:4px">HTML+CSS+JS 全在 index.html</div></div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px"><b>🧩 架构清晰</b><div style="color:var(--ink-2);margin-top:4px">Game 管状态 · Renderer 管界面 · 关注点分离</div></div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px"><b>🎨 CSS 生成卡牌</b><div style="color:var(--ink-2);margin-top:4px">全部卡牌由代码绘制，无图片资源</div></div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px"><b>📱 响应式</b><div style="color:var(--ink-2);margin-top:4px">桌面与移动端自适应</div></div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px"><b>💾 本地存储</b><div style="color:var(--ink-2);margin-top:4px">保存主题、音量等设置</div></div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px"><b>✨ 平滑动画</b><div style="color:var(--ink-2);margin-top:4px">发牌、出牌、抽牌、回合流转</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">AI OPPONENTS</div>
+  <h2 style="font-size:clamp(30px,4.5vw,52px);margin:10px 0 26px">AI 对手</h2>
+  <div style="display:flex;flex-direction:column;gap:14px;max-width:720px">
+    <div style="display:flex;gap:14px"><span style="color:var(--accent)">🎯</span><span><b>优先高价值牌</b>——8、9、+2、野牌能打就打</span></div>
+    <div style="display:flex;gap:14px"><span style="color:var(--accent)">🧠</span><span><b>策略性用 +4</b>——只在没有匹配颜色时才打出</span></div>
+    <div style="display:flex;gap:14px"><span style="color:var(--accent)">🐢</span><span><b>思考延迟 1–1.5 秒</b>——节奏自然，不抢拍</span></div>
+    <div style="display:flex;gap:14px"><span style="color:var(--accent)">👀</span><span><b>高亮展示</b>——AI 出的牌会短暂高亮，你看得见每一步</span></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker">PLAY NOW</div>
+  <h2 style="font-size:clamp(34px,5vw,64px);margin:14px 0 12px">打开就能玩</h2>
+  <p class="lead" style="margin-bottom:6px">双击 <code style="font-family:var(--sans);background:#fff;border:1px solid var(--line);padding:2px 8px;border-radius:6px">index.html</code>，开始你的 UNO 冒险。</p>
+  <p style="margin-top:26px;color:var(--ink-2)">谢谢观看 · 祝你早日冲到 500 分 🎉</p>
+</section>
+
+</main>
+<footer class="nav">
+  <span id="pageNum">1 / 13</span>
+  <span style="letter-spacing:.15em">← → 翻页 · Esc 全屏</span>
+</footer>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let cur=0;
+  function go(n){
+    cur=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+    document.getElementById('pageNum').textContent=(cur+1)+' / '+slides.length;
+    document.getElementById('progBar').style.width=((cur+1)/slides.length*100)+'%';
+  }
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(cur+1);
+    else if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(slides.length-1);
+    else if(e.key==='Escape'){
+      if(!document.fullscreenElement)document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+  document.getElementById('deck').addEventListener('click',e=>{
+    const r=e.currentTarget.getBoundingClientRect();
+    if(e.clientX>r.left+r.width/2)go(cur+1);else go(cur-1);
+  });
+  go(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* UNO Card Design Reference - CSS Generated Cards */
+/* These styles show how to create UNO-style cards using pure CSS */
+
+/* Base card styling */
+.uno-card {
+  width: 120px;
+  height: 180px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+/* Card Colors */
+.card-red { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
+.card-green { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; }
+.card-blue { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
+.card-yellow { background: linear-gradient(135deg, #f1c40f, #f39c12); color: black; }
+
+/* Wild Cards */
+.card-wild {
+  background: linear-gradient(135deg, #8e44ad, #6c3489);
+  color: white;
+}
+
+.card-wild-draw-four {
+  background: linear-gradient(135deg, #2c3e50, #1a2530);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-wild-draw-four::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  opacity: 0.3;
+}
+
+/* Number Cards */
+.card-number {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-number .top-left {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.card-number .center-number {
+  font-size: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.card-number .bottom-right {
+  font-size: 24px;
+  line-height: 1;
+  text-align: right;
+  transform: rotate(180deg);
+}
+
+/* Action Card Icons */
+.card-action .icon {
+  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+/* Action card specific colors */
+.card-skip { border: 3px solid rgba(255, 255, 255, 0.5); }
+.card-reverse { border: 3px dashed rgba(255, 255, 255, 0.5); }
+.card-draw-two { border: 3px double rgba(255, 255, 255, 0.5); }
+
+/* Icons for action cards */
+.icon-skip::before { content: '→'; }
+.icon-reverse::before { content: '↻'; }
+.icon-draw-two::before { content: '+2'; }
+.icon-wild::before { content: '★'; }
+.icon-wild-draw-four::before { content: '+4'; }
+
+/* Card Back Design */
+.card-back {
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.card-back::after {
+  content: 'UNO';
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Card States */
+.card-playable {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.card-not-playable {
+  opacity: 0.6;
+  transform: rotate(5deg);
+}
+
+.card-selected {
+  transform: translateY(-20px);
+  box-shadow: 0 15px 30px rgba(255, 255, 0, 0.5);
+  z-index: 10;
+}
+
+/* Hand Layout */
+.hand {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: -20px;
+  padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .uno-card {
+    width: 80px;
+    height: 120px;
+  }
+}
