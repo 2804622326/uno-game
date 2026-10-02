@@ -25,21 +25,21 @@ function seeded() {
 
 console.log('核心逻辑测试：');
 
-t('牌堆：152 张，0 牌 24 张，颜色/类型数量正确', () => {
+t('牌堆：160 张，0 牌 32 张，颜色/类型数量正确', () => {
   const d = U.buildDeck();
-  eq(d.length, 152, '总数 ' + d.length);
+  eq(d.length, 160, '总数 ' + d.length);
   for (const c of ['red', 'green', 'blue', 'yellow']) {
     const col = d.filter(x => x.color === c);
-    eq(col.length, 36, c + ' 应有36张, 实际' + col.length);
-    eq(col.filter(x => x.type === 'number').length, 24, c + ' 数字牌24');
+    eq(col.length, 38, c + ' 应有38张, 实际' + col.length);
+    eq(col.filter(x => x.type === 'number').length, 26, c + ' 数字牌26');
     eq(col.filter(x => x.type === 'action').length, 12, c + ' 动作牌12');
     eq(col.filter(x => x.value === 'draw2').length, 4, c + ' +2每色4张');
     eq(col.filter(x => x.value === 'draw2rev').length, 4, c + ' 转向+2每色4张');
-    eq(col.filter(x => x.value === '0').length, 6, c + ' 0牌6');
+    eq(col.filter(x => x.value === '0').length, 8, c + ' 0牌8');
   }
   eq(d.filter(x => x.type === 'wild').length, 4, 'wild 4');
   eq(d.filter(x => x.type === 'wild4').length, 4, 'wild4 4');
-  eq(d.filter(x => x.type === 'number' && x.value === '0').length, 24, '0牌共24张');
+  eq(d.filter(x => x.type === 'number' && x.value === '0').length, 32, '0牌共32张');
 });
 
 t('洗牌：种子随机可复现且含全部牌', () => {

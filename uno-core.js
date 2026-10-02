@@ -16,7 +16,7 @@
   function buildDeck() {
     const deck = [];
     for (const c of COLORS) {
-      for (let i = 0; i < 6; i++) deck.push({ color: c, value: '0', type: 'number' }); // 机会0：每色6张，共24张
+      for (let i = 0; i < 8; i++) deck.push({ color: c, value: '0', type: 'number' }); // 机会0：每色8张，共32张
       for (let n = 1; n <= 9; n++) {
         deck.push({ color: c, value: String(n), type: 'number' });
         deck.push({ color: c, value: String(n), type: 'number' });
@@ -29,7 +29,7 @@
     }
     for (let i = 0; i < 4; i++) deck.push({ color: null, value: 'wild', type: 'wild' });
     for (let i = 0; i < 4; i++) deck.push({ color: null, value: 'wild4', type: 'wild4' });
-    return deck; // 128
+    return deck; // 160
   }
 
   function shuffle(arr, rand) {
