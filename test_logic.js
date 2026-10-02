@@ -469,6 +469,15 @@ t('铁索连环：伙伴同受抽牌并断链', () => {
   ok(dopts._chainShared, '标记共享');
 });
 
+t('铁索连环：随机选择一名其他玩家', () => {
+  const g = U.newGame(4);
+  const first = U.applyIron(g, 0, () => 0);
+  eq(first.partner, 1, '随机索引0选中候选座位1');
+  ok(first.partner !== 0, '不连接自己');
+  const last = U.applyIron(g, 0, () => 0.99);
+  eq(last.partner, 3, '随机索引末位选中座位3');
+});
+
 t('决斗：无法出牌者抽 count 张', () => {
   const g = U.newGame(4);
   g.deck = U.buildDeck();

@@ -445,7 +445,7 @@ button:disabled{cursor:not-allowed;opacity:.45;}
         ▸ <b>火攻</b>：选对手比颜色，颜色相同你抽4，不同对手抽4。<br>
         ▸ <b>闪电</b>：掷两颗骰子，按点数决定谁抽多少张。<br>
         ▸ <b>决斗</b>：指定颜色与对手对决，先无法出牌者抽「期间出牌数」张。<br>
-        ▸ <b>铁索连环</b>：与对家形成风险共同体，任一方被罚抽牌时另一方同受，一次后解除。<br>
+        ▸ <b>铁索连环</b>：随机与一名其他玩家形成风险共同体，任一方被罚抽牌时另一方同受，一次后解除。<br>
         ▸ <b>桃源结义</b>：所有人轮流丢弃最多一半手牌。<br>
         ▸ <b>五谷丰登</b>：所有人轮流丢弃所有与「0」同色的牌。<br>
         <b>UNO</b>：剩 1 张时须喊 UNO，被捉到漏喊抽 2 张。<br>
@@ -1272,6 +1272,8 @@ S.missedUno = false;     // 玩家漏喊 UNO
 S._colorCb = null;
 S._peachSel = [];
 S._peachMax = 0;
+S._peachOrder = null;
+S._peachStep = 0;
 
 function colorHex(c) {
   if (c.type === 'wild') return 'linear-gradient(135deg,#ffc93c,#d9a441)';
@@ -1446,11 +1448,21 @@ function finishDuelDraw(idx) {
 function doPeach(idx) {
   const order = [];
   for (let k = 0; k < S.g.numPlayers; k++) order.push((idx + k) % S.g.numPlayers);
+  S._peachOrder = order;
+  S._peachStep = 0;
   peachStep(order, 0);
 }
 function peachStep(order, step) {
   const g = S.g;
-  if (step >= order.length) { renderAll(); beginTurn(); return; }
+  S._peachOrder = order;
+  S._peachStep = step;
+  if (step >= order.length) {
+    S._peachOrder = null;
+    S._peachStep = 0;
+    renderAll();
+    beginTurn();
+    return;
+  }
   const pIdx = order[step];
   const p = g.players[pIdx];
   const maxC = Math.floor(p.hand.length / 2);
@@ -1492,9 +1504,8 @@ function confirmPeach(pIdx) {
   closeModal();
   setMsg('🍑 你丢弃 ' + removed.length + ' 张');
   renderSeats();
-  const order = [];
-  for (let k = 0; k < g.numPlayers; k++) order.push((0 + k) % g.numPlayers);
-  peachStep(order, 0);
+  const order = S._peachOrder || [];
+  peachStep(order, S._peachStep + 1);
 }
 
 /* 五谷丰登 */

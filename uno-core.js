@@ -385,9 +385,11 @@
     return { d1, d2, target, count, idx };
   }
 
-  // 铁索连环
-  function applyIron(g, idx) {
-    const partner = oppositeOf(g, idx);
+  // 铁索连环：从其他玩家中随机选择一位伙伴。
+  function applyIron(g, idx, rand) {
+    const r = rand || Math.random;
+    const candidates = g.players.map((_, i) => i).filter(i => i !== idx);
+    const partner = candidates[Math.floor(r() * candidates.length)];
     g.ironChain = { a: idx, b: partner };
     return { partner };
   }
