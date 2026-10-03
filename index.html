@@ -1047,8 +1047,11 @@ function beginTurn() {
   if (!p.isAI) {
     S.humanCanAct = true;
     setStatus(0, '轮到你');
-    if (!UNOCore.hasPlayable(p.hand, g.activeColor, g.activeValue)) {
-      setMsg('没有可出的牌，点击牌堆抽一张');
+    const hasPlayable = g.duel
+      ? UNOCore.duelPlayableIndexes(p.hand, g.activeColor, g.activeValue).length > 0
+      : UNOCore.hasPlayable(p.hand, g.activeColor, g.activeValue);
+    if (!hasPlayable) {
+      setMsg(g.duel ? '决斗中无法出牌，点击牌堆结束决斗' : '没有可出的牌，点击牌堆抽一张');
       pulseDraw(true);
     }
   } else {
@@ -1452,6 +1455,7 @@ function doDuelPick(idx) {
 }
 function confirmDuel(aIdx, bIdx, color) {
   const g = S.g;
+  closeModal();
   UNOCore.applyDuelStart(g, aIdx, color, bIdx);
   setMsg('⚔ 决斗开始！' + g.players[bIdx].name + ' 先出（' + UNOCore.COLOR_NAME[color] + '色）');
   setTimeout(beginTurn, 1200);
@@ -2073,7 +2077,7 @@ function onHandClick(i, wrap) {
   const card = p.hand[i];
   const inStack = g.drawStack && g.drawStack.target === 0;
   const ok = inStack ? UNOCore.isDrawStackCard(card)
-    : g.duel ? UNOCore.duelPlayableIndexes(p.hand, g.activeColor, g.activeValue).includes(cardIdx)
+    : g.duel ? UNOCore.duelPlayableIndexes(p.hand, g.activeColor, g.activeValue).includes(i)
     : UNOCore.legalPlayable(card, p.hand, g.activeColor, g.activeValue);
   if (!ok) {
     shake(wrap);
@@ -2100,6 +2104,10 @@ function onDrawClick() {
   if (g.duel && g.current !== 0) return;
   if (MODE === 'multi') {
     sendMsg({ type: 'action', action: 'draw' });
+    return;
+  }
+  if (g.duel) {
+    finishDuelDraw(0);
     return;
   }
   // 接龙中：点击牌堆 = 抓累计张数并结束接龙
