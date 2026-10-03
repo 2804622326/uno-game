@@ -558,6 +558,7 @@ const S = {
   settings: { theme: 'dark', muted: false, aiSpeed: 1.2 },
   aiTimer: null,
   flowTimer: null,
+  flowToken: 0,
   humanCanAct: false,
   selectedIdx: -1,
   doneCardId: null,
@@ -983,6 +984,18 @@ function clearAI() {
   clearTimeout(S.aiTimer);
   clearTimeout(S.flowTimer);
   S.aiTimer = null; S.flowTimer = null;
+  S.flowToken++;
+}
+
+/* 特殊活动统一串行：旧回调失效后，才允许进入下一回合。 */
+function scheduleFlowNext(fn, delay) {
+  clearTimeout(S.flowTimer);
+  const token = ++S.flowToken;
+  S.flowTimer = setTimeout(function () {
+    if (token !== S.flowToken) return;
+    S.flowTimer = null;
+    fn();
+  }, delay);
 }
 
 /* 进行中状态横幅：多人=服务器流程 / 庞氏 / 决斗；单人=庞氏 / 决斗 */
@@ -1323,7 +1336,7 @@ function runChanceFlow(idx, activity) {
     g.ponzi = { count: 0 };
     setMsg('💸 庞氏骗局开始，继续出牌！');
     openModal(modalTitle('💸 庞氏骗局') + modalSub('接下来继续正常出牌。第一个被迫抽牌的玩家将抽取「期间所有出牌与抽牌数量总和」张牌，然后骗局结束。'));
-    setTimeout(function () { closeModal(); beginTurn(); }, 3000);
+    scheduleFlowNext(function () { closeModal(); beginTurn(); }, 3000);
     return;
   }
   if (activity === 'lightning') { doLightning(idx); return; }
@@ -1331,7 +1344,7 @@ function runChanceFlow(idx, activity) {
     const r = UNOCore.applyIron(g, idx);
     setStatus(r.partner, '⛓ 铁索');
     openModal(modalTitle('⛓ 铁索连环') + modalSub('你与 <b>' + g.players[r.partner].name + '</b> 形成风险共同体：任一方被罚抽牌时另一方同受，遭受一次后解除。'));
-    setTimeout(function () { closeModal(); beginTurn(); }, 3000);
+    scheduleFlowNext(function () { closeModal(); beginTurn(); }, 3000);
     return;
   }
   if (activity === 'peach') { doPeach(idx); return; }
@@ -1342,7 +1355,7 @@ function runChanceFlow(idx, activity) {
 
 function modalInfoAndContinue(title, body, delay) {
   openModal(modalTitle(title) + modalSub(body));
-  setTimeout(function () { closeModal(); beginTurn(); }, delay || 3000);
+  scheduleFlowNext(function () { closeModal(); beginTurn(); }, delay || 3000);
 }
 
 /* 闪电 */
@@ -1352,7 +1365,7 @@ function doLightning(idx) {
   openModal(modalTitle('⚡ 闪电') +
     '<div class="dice-box"><div class="die">' + res.d1 + '</div><div class="die">' + res.d2 + '</div></div>' +
     modalSub('<b>' + g.players[res.target].name + '</b> 被雷劈中，抽 <b>' + res.count + '</b> 张牌！'));
-  setTimeout(function () {
+  scheduleFlowNext(function () {
     closeModal(); renderAll(); showHeadFx(res.target, 'draw', { count: res.count });
     if (maybeHandLimitEnd()) return;
     beginTurn();
@@ -1368,7 +1381,7 @@ function doShowdownPick(idx, type) {
     const target = others[Math.floor(Math.random() * others.length)];
     const ci = UNOCore.pickHighestCard(g.players[idx].hand);
     setStatus(idx, '亮牌中…');
-    setTimeout(function () { revealCard(idx, target, ci, type); }, 1600);
+    scheduleFlowNext(function () { revealCard(idx, target, ci, type); }, 1600);
     return;
   }
   let html = modalTitle(type === 'poker' ? '🃏 德州扑克' : '🔥 火攻');
@@ -1421,7 +1434,7 @@ function finishShowdown(aIdx, bIdx, aCardIdx, bCardIdx, type) {
     miniCard(bCard) + '</div>';
   html += '<div class="result-line"><b>' + res.detail + '</b></div>';
   openModal(html);
-  setTimeout(function () {
+  scheduleFlowNext(function () {
     closeModal(); renderAll();
     if (res.drawIdx != null) showHeadFx(res.drawIdx, 'draw', { count: res.count });
     if (maybeHandLimitEnd()) return;
@@ -1439,7 +1452,7 @@ function doDuelPick(idx) {
     const color = UNOCore.chooseColorForAI(g.players[idx].hand);
     UNOCore.applyDuelStart(g, idx, color, target);
     setMsg('⚔ ' + g.players[idx].name + ' 发起决斗！起手：' + UNOCore.COLOR_NAME[color] + '色');
-    setTimeout(beginTurn, 2000);
+    scheduleFlowNext(beginTurn, 2000);
     return;
   }
   openColorPicker(function (color) {
@@ -1458,7 +1471,7 @@ function confirmDuel(aIdx, bIdx, color) {
   closeModal();
   UNOCore.applyDuelStart(g, aIdx, color, bIdx);
   setMsg('⚔ 决斗开始！' + g.players[bIdx].name + ' 先出（' + UNOCore.COLOR_NAME[color] + '色）');
-  setTimeout(beginTurn, 1200);
+  scheduleFlowNext(beginTurn, 1200);
 }
 function finishDuelDraw(idx) {
   const g = S.g;
@@ -1468,7 +1481,7 @@ function finishDuelDraw(idx) {
   toast('⚔ 决斗结束：' + g.players[idx].name + ' 无法出牌，抽 ' + info.X + ' 张');
   sfx('draw');
   if (maybeHandLimitEnd()) return;
-  setTimeout(beginTurn, 1400);
+  scheduleFlowNext(beginTurn, 1400);
 }
 
 /* 桃源结义 */
@@ -1493,13 +1506,13 @@ function peachStep(order, step) {
   const pIdx = order[step];
   const p = g.players[pIdx];
   const maxC = Math.floor(p.hand.length / 2);
-  if (maxC <= 0) { setTimeout(function () { peachStep(order, step + 1); }, 400); return; }
+  if (maxC <= 0) { scheduleFlowNext(function () { peachStep(order, step + 1); }, 400); return; }
   if (p.isAI) {
     const picks = UNOCore.pickLowestCards(p.hand, maxC);
     UNOCore.discardCards(g, pIdx, picks);
     setMsg('🍑 ' + p.name + ' 丢弃 ' + picks.length + ' 张');
     renderSeats();
-    setTimeout(function () { peachStep(order, step + 1); }, 1200);
+    scheduleFlowNext(function () { peachStep(order, step + 1); }, 1200);
     return;
   }
   S._peachSel = [];
@@ -1549,7 +1562,7 @@ function doHarvest(idx) {
   });
   renderAll();
   setMsg('🌾 五谷丰登：所有人丢出 ' + UNOCore.COLOR_NAME[color] + ' 色牌，共 ' + total + ' 张');
-  setTimeout(beginTurn, 2600);
+  scheduleFlowNext(beginTurn, 2600);
 }
 
 /* ---------- 捉 UNO ---------- */

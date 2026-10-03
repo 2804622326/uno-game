@@ -79,6 +79,8 @@ function createRoom() {
     g: null,
     settings: { aiFill: true, aiSpeed: 1.2 },
     turnTimer: null,
+    flowTimer: null,
+    flowToken: 0,
     awaitingHuman: false,  // 当前是否为人类回合
     drewThisTurn: false,   // 当前玩家本回合是否已抽到可打出的牌
     flow: null,            // 交互式特殊流程 { name, forSeat, ... }
@@ -217,7 +219,9 @@ function broadcastState(room) {
         mustDraw = false;
         playDrawn = false;
       } else {
-        const hasPlay = UNOCore.hasPlayable(g.players[my].hand, g.activeColor, g.activeValue);
+        const hasPlay = g.duel
+          ? UNOCore.duelPlayableIndexes(g.players[my].hand, g.activeColor, g.activeValue).length > 0
+          : UNOCore.hasPlayable(g.players[my].hand, g.activeColor, g.activeValue);
         if (room.drewThisTurn) playDrawn = true;
         else mustDraw = !hasPlay;
       }
@@ -264,7 +268,10 @@ function othersOf(room, idx) {
 function beginTurn(room) {
   console.log('[S] beginTurn current=' + room.g.current + ' ' + room.g.players[room.g.current].name);
   clearTimeout(room.turnTimer);
+  clearTimeout(room.flowTimer);
   room.turnTimer = null;
+  room.flowTimer = null;
+  room.flowToken++;
   room.awaitingHuman = false;
   room.drewThisTurn = false;
   room.flow = null;
@@ -283,10 +290,23 @@ function beginTurn(room) {
     if (inStack) {
       sendToSeat(room, cur, { type: 'message', text: '接龙中！可出 +2/+4 接龙，或抓 ' + g.drawStack.count + ' 张' });
     } else {
-      const hasPlay = UNOCore.hasPlayable(g.players[cur].hand, g.activeColor, g.activeValue);
-      sendToSeat(room, cur, { type: 'message', text: hasPlay ? '轮到你' : '没有可出的牌，点击牌堆抽一张' });
+      const hasPlay = g.duel
+        ? UNOCore.duelPlayableIndexes(g.players[cur].hand, g.activeColor, g.activeValue).length > 0
+        : UNOCore.hasPlayable(g.players[cur].hand, g.activeColor, g.activeValue);
+      sendToSeat(room, cur, { type: 'message', text: hasPlay ? '轮到你' : (g.duel ? '决斗中无法出牌，点击牌堆结束决斗' : '没有可出的牌，点击牌堆抽一张') });
     }
   }
+}
+
+/* 特殊活动统一串行，避免即时技能覆盖上一段提示或重复推进回合。 */
+function scheduleFlowNext(room, fn, delay) {
+  clearTimeout(room.flowTimer);
+  const token = ++room.flowToken;
+  room.flowTimer = setTimeout(() => {
+    if (token !== room.flowToken) return;
+    room.flowTimer = null;
+    fn();
+  }, delay);
 }
 
 function advance(room) {
@@ -456,21 +476,21 @@ function runChanceFlow(room, idx, activity) {
     case 'ponzi':
       g.ponzi = { count: 0 };
       emitMsg(room, '💸 庞氏骗局开始，继续出牌！');
-      beginTurn(room);
+      scheduleFlowNext(room, () => beginTurn(room), 1200);
       return;
     case 'lightning': {
       const r = UNOCore.applyLightning(g, idx);
       emitEffects(room, [{ type: 'lightning', d1: r.d1, d2: r.d2, target: r.target, count: r.count }]);
       emitMsg(room, '⚡ ' + g.players[r.target].name + ' 被雷劈中，抽 ' + r.count + ' 张牌！');
       if (maybeHandLimitEnd(room)) return;
-      beginTurn(room);
+      scheduleFlowNext(room, () => beginTurn(room), 2400);
       return;
     }
     case 'iron': {
       const r = UNOCore.applyIron(g, idx);
       emitEffects(room, [{ type: 'ironFormed', a: idx, b: r.partner }]);
       emitMsg(room, '⛓ 铁索连环：' + g.players[idx].name + ' 与 ' + g.players[r.partner].name + ' 形成风险共同体');
-      beginTurn(room);
+      scheduleFlowNext(room, () => beginTurn(room), 1200);
       return;
     }
     case 'peach':
@@ -487,7 +507,7 @@ function runChanceFlow(room, idx, activity) {
       doShowdown(room, idx, activity);
       return;
     default:
-      beginTurn(room);
+      scheduleFlowNext(room, () => beginTurn(room), 1200);
   }
 }
 
@@ -501,18 +521,21 @@ function doPeach(room, idx) {
 
 function peachStep(room, order, step) {
   const g = room.g;
-  if (step >= order.length) { beginTurn(room); return; }
+  if (step >= order.length) { scheduleFlowNext(room, () => beginTurn(room), 1200); return; }
   const pIdx = order[step];
   const p = g.players[pIdx];
   const maxC = Math.floor(p.hand.length / 2);
-  if (maxC <= 0) { peachStep(room, order, step + 1); return; }
+  if (maxC <= 0) {
+    scheduleFlowNext(room, () => peachStep(room, order, step + 1), 400);
+    return;
+  }
   if (p.isAI) {
     const picks = UNOCore.pickLowestCards(p.hand, maxC);
     const removed = UNOCore.discardCards(g, pIdx, picks);
     emitEffects(room, [{ type: 'peachDiscard', seat: pIdx, count: removed.length }]);
     emitMsg(room, '🍑 ' + p.name + ' 丢弃 ' + removed.length + ' 张');
     broadcastState(room);
-    peachStep(room, order, step + 1);
+    scheduleFlowNext(room, () => peachStep(room, order, step + 1), 900);
     return;
   }
   room.flow = { name: 'peach', order, step, forSeat: pIdx, maxC };
@@ -534,7 +557,7 @@ function doHarvest(room, idx) {
   emitMsg(room, '🌾 五谷丰登：所有人丢出 ' + UNOCore.COLOR_NAME[color] + ' 色牌，共 ' + total + ' 张');
   emitEffects(room, [{ type: 'harvest', color, perSeat, total }]);
   broadcastState(room);
-  beginTurn(room);
+  scheduleFlowNext(room, () => beginTurn(room), 1600);
 }
 
 function doDuelStart(room, idx) {
@@ -547,7 +570,7 @@ function doDuelStart(room, idx) {
     emitEffects(room, [{ type: 'duelStart', a: idx, b: target, color }]);
     emitMsg(room, '⚔ ' + g.players[idx].name + ' 发起决斗！起手：' + UNOCore.COLOR_NAME[color] + '色');
     broadcastState(room);
-    beginTurn(room);
+    scheduleFlowNext(room, () => beginTurn(room), 1400);
     return;
   }
   room.flow = { name: 'duel-color', forSeat: idx };
@@ -610,7 +633,7 @@ function finishShowdown(room, info) {
   }]);
   broadcastState(room);
   if (maybeHandLimitEnd(room)) return;
-  beginTurn(room);
+  scheduleFlowNext(room, () => beginTurn(room), 2600);
 }
 
 function duelDrawFlow(room, idx) {
@@ -620,7 +643,7 @@ function duelDrawFlow(room, idx) {
   emitMsg(room, '⚔ 决斗结束：' + g.players[idx].name + ' 无法出牌，抽 ' + info.X + ' 张');
   broadcastState(room);
   if (maybeHandLimitEnd(room)) return;
-  beginTurn(room);
+  scheduleFlowNext(room, () => beginTurn(room), 1400);
 }
 
 function roundEndFlow(room, winnerIdx, reason) {
@@ -671,7 +694,10 @@ function resetToLobby(room) {
   room.roundOver = false;
   room.unoMissing = new Set();
   clearTimeout(room.turnTimer);
+  clearTimeout(room.flowTimer);
   room.turnTimer = null;
+  room.flowTimer = null;
+  room.flowToken++;
   for (const s of room.seats) if (s && s.ws) s.ready = false;
   broadcastLobby(room);
 }
@@ -724,7 +750,7 @@ function resolvePromptAsAI(room, seat) {
     }
     default:
       room.flow = null;
-      beginTurn(room);
+      scheduleFlowNext(room, () => beginTurn(room), 1200);
   }
 }
 
@@ -737,7 +763,7 @@ function doDuelTargetChoice(room, seat, color) {
     emitEffects(room, [{ type: 'duelStart', a: seat, b: target, color }]);
     emitMsg(room, '⚔ ' + g.players[seat].name + ' 发起决斗！起手：' + UNOCore.COLOR_NAME[color] + '色');
     broadcastState(room);
-    beginTurn(room);
+    scheduleFlowNext(room, () => beginTurn(room), 1400);
     return;
   }
   room.flow = { name: 'duel-target', forSeat: seat, color };
@@ -849,6 +875,11 @@ function startGame(room) {
     g.players[i].isAI = s.isAI;
   });
   room.g = g;
+  clearTimeout(room.turnTimer);
+  clearTimeout(room.flowTimer);
+  room.turnTimer = null;
+  room.flowTimer = null;
+  room.flowToken++;
   room.flow = null;
   room.unoMissing = new Set();
   room.roundOver = false;
@@ -895,6 +926,7 @@ function handleAction(room, seat, ws, msg) {
       if (g.duel && g.current !== g.duel.a && g.current !== g.duel.b) { send(ws, { type: 'error', message: '决斗进行中，其他玩家等待' }); return; }
       const card = g.players[seat.seat].hand[msg.cardIdx];
       if (!card) { send(ws, { type: 'error', message: '无效卡牌' }); return; }
+      room.awaitingHuman = false;
       if ((card.type === 'wild' || card.type === 'wild4') && !msg.color) {
         room.flow = { name: 'play-color', forSeat: seat.seat, seat: seat.seat, cardIdx: msg.cardIdx };
         broadcastState(room);
@@ -908,6 +940,7 @@ function handleAction(room, seat, ws, msg) {
       if (room.flow) { console.log('[DBG] action blocked by flow:', JSON.stringify(room.flow), 'seat=', seat.seat, 'action=', msg.action); send(ws, { type: 'error', message: '正在进行特殊流程，请稍候' }); return; }
       if (g.current !== seat.seat) { send(ws, { type: 'error', message: '还没轮到你' }); return; }
       if (room.drewThisTurn) { send(ws, { type: 'error', message: '本回合已抽过牌' }); return; }
+      room.awaitingHuman = false;
       if (g.drawStack && g.drawStack.target === seat.seat) {
         doDrawStackFlow(room, seat.seat);
         return;
@@ -977,7 +1010,7 @@ function handleChoice(room, seat, ws, msg) {
       emitEffects(room, [{ type: 'duelStart', a: seat.seat, b: target, color: flow.color }]);
       emitMsg(room, '⚔ ' + g.players[seat.seat].name + ' 发起决斗！起手：' + UNOCore.COLOR_NAME[flow.color] + '色');
       broadcastState(room);
-      beginTurn(room);
+      scheduleFlowNext(room, () => beginTurn(room), 1400);
       return;
     }
     case 'peach': {
@@ -1025,6 +1058,7 @@ function leaveSeat(room, seat, ws) {
   const anyWs = room.seats.some(s => s && s.ws);
   if (!anyWs) {
     clearTimeout(room.turnTimer);
+    clearTimeout(room.flowTimer);
     rooms.delete(room.code);
   }
 }
